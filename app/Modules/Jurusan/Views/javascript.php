@@ -1,5 +1,15 @@
 <?= $this->section('scripts') ?>
 <script>
+    function onAdd() {
+        var modal = $('#modal_jurusan');
+        var modal_title = 'Tambah Jurusan';
+        var modal_btn_text = 'Simpan';
+        modal.find('.modal-title').html(modal_title);
+        modal.find('.modal-footer > button.action').html(modal_btn_text);
+        modal.find('input.error-text').html('');
+        modal.modal('show');
+    };
+
     $('#add-jurusan-form').on('submit', function(e) {
         e.preventDefault();
         var csrfName = $('.ci_csrf_data').attr('name');
@@ -42,7 +52,7 @@
     });
 
     var table = $('#data_jurusan').DataTable({
-        "processing": true,
+        "processing": false,
         "serverSide": true,
         "order": [],
         "ajax": {
@@ -63,7 +73,7 @@
             }
         ],
         "language": {
-            "url": "<?= base_url() ?>/datatable/lang/indonesia.json"
+            "url": "<?= base_url('stisla') ?>/assets/lang/indonesia.json"
         }
     });
 
@@ -76,7 +86,7 @@
         }, function(response) {
             var modal_title = 'Edit Jurusan';
             var modal_btn_text = 'Simpan Perubahan';
-            var modal = $('body').find('div#edit-jurusan-modal');
+            var modal = $('body').find('div#modal_jurusan');
             modal.find('form').find('input[type="hidden"][name="id"]').val(id);
             modal.find('.modal-title').html(modal_title);
             modal.find('.modal-footer > button.action').html(modal_btn_text);

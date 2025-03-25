@@ -106,7 +106,7 @@
             }
         ],
         "language": {
-            "url": "<?= base_url() ?>/datatable/lang/indonesia.json"
+            "url": "<?= base_url('stisla') ?>/assets/lang/indonesia.json"
         }
     });
 
@@ -128,7 +128,7 @@
             },
         ],
         "language": {
-            "url": "<?= base_url() ?>/datatable/lang/indonesia.json"
+            "url": "<?= base_url('stisla') ?>/assets/lang/indonesia.json"
         }
     });
 

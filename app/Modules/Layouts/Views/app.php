@@ -13,7 +13,14 @@
     <link rel="stylesheet" href="<?= base_url('stisla') ?>/node_modules/weathericons/css/weather-icons-wind.min.css">
     <link rel="stylesheet" href="<?= base_url('stisla') ?>/node_modules/summernote/dist/summernote-bs4.css">
     <link rel="stylesheet" href="<?= base_url('stisla') ?>/assets/css/style.css">
+    <link rel="stylesheet" href="<?= base_url('stisla') ?>/assets/css/custom.css">
     <link rel="stylesheet" href="<?= base_url('stisla') ?>/assets/css/components.css">
+    <link rel="stylesheet" href="<?= base_url('stisla') ?>/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="<?= base_url('stisla') ?>/node_modules/datatables.net-select-bs4/css/select.bootstrap4.min.css">
+    <link rel="stylesheet" href="<?= base_url('stisla') ?>/node_modules/bootstrap-daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="<?= base_url('stisla') ?>/node_modules/select2/dist/css/select2.min.css">
+    <link rel="stylesheet" href="<?= base_url('stisla') ?>/node_modules/selectric/public/selectric.css">
+    <link rel="stylesheet" href="<?= base_url('stisla') ?>/node_modules/bootstrap-timepicker/css/bootstrap-timepicker.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>/sweetalert2/sweetalert2.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>/extra-assets/ijaboCropTool/ijaboCropTool.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>/apexcharts/dist/apexcharts.css">
@@ -32,10 +39,22 @@
             <div class="navbar-bg"></div>
             <?= $this->include('App\Modules\Layouts\Views\partials\navbar.php') ?>
             <?= $this->include('App\Modules\Layouts\Views\partials\sidebar.php') ?>
-            <?= $this->renderSection('content') ?>
+            <div class="main-content">
+                <section class="section">
+                    <div class="section-header">
+                        <h1><?= $title ?></h1>
+                        <div class="section-header-breadcrumb">
+                            <div class="breadcrumb-item"><?= $title ?></div>
+                        </div>
+                    </div>
+                    <?= $this->renderSection('content') ?>
+                </section>
+            </div>
             <?= $this->include('App\Modules\Layouts\Views\partials\footer.php') ?>
         </div>
     </div>
+
+    <div class="loading-bar" id="loadingBar"></div>
 
     <!-- General JS Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
@@ -52,7 +71,13 @@
     <script src="<?= base_url('stisla') ?>/node_modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
     <script src="<?= base_url('stisla') ?>/assets/js/scripts.js"></script>
     <script src="<?= base_url('stisla') ?>/assets/js/custom.js"></script>
-    <script src="<?= base_url('stisla') ?>/assets/js/page/index-0.js"></script>
+    <script src="<?= base_url('stisla') ?>/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="<?= base_url('stisla') ?>/node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="<?= base_url('stisla') ?>/node_modules/datatables.net-select-bs4/js/select.bootstrap4.min.js"></script>
+    <script src="<?= base_url('stisla') ?>/node_modules/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="<?= base_url('stisla') ?>/node_modules/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+    <script src="<?= base_url('stisla') ?>/node_modules/select2/dist/js/select2.full.min.js"></script>
+    <script src="<?= base_url('stisla') ?>/node_modules/selectric/public/jquery.selectric.min.js"></script>
     <script src="<?= base_url() ?>/sweetalert2/sweetalert2.min.js"></script>
     <script src="<?= base_url() ?>/extra-assets/ijaboCropTool/ijaboCropTool.min.js"></script>
     <script src="<?= base_url() ?>/apexcharts/dist/apexcharts.js"></script>

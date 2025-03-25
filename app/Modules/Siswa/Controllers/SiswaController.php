@@ -54,11 +54,11 @@ class SiswaController extends BaseController
                 $no++;
                 $row = [];
 
-                $buttonDetail = '<div class="d-flex"><a href="#" class="btn btn-sm btn-light-primary p-0 p-2 detail-siswa-btn me-2" data-id="' . $list->id . '"><i class="ki-outline ki-eye fs-4"></i></a>';
-                $buttonEdit = '<div class="d-flex"><a href="#" class="btn btn-sm btn-light-warning btn-action edit-siswa-btn p-0 p-2 me-2" data-id="' . $list->id . '"><i class="ki-outline ki-notepad-edit fs-4"></i></a>';
-                $buttonDelete = '<a href="#" class="btn btn-sm btn-light-danger delete-siswa-btn p-0 p-2" data-id="' . $list->id . '"><i class="ki-outline ki-basket fs-4"></i></a></div>';
+                $buttonDetail = '<div class="d-flex"><a href="#" class="btn btn-info detail-siswa-btn mr-1" data-id="' . $list->id . '"><i class="fas fa-eye"></i></a>';
+                $buttonEdit = '<a href="#" class="btn btn-warning btn-action edit-siswa-btn mr-1" data-id="' . $list->id . '"><i class="fas fa-pencil-alt"></i></a>';
+                $buttonDelete = '<a href="#" class="btn btn-danger delete-siswa-btn" data-id="' . $list->id . '"><i class="fas fa-trash"></i></a></div>';
 
-                $row[] = '<div class="form-check form-check-sm form-check-custom form-check-solid"><input class="form-check-input check" type="checkbox" name="id[]" value="' . $list->id . '" /></div>';
+                $row[] = '<div class="custom-checkbox custom-control"><input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" name="id[]" value="' . $list->id . '"><label for="checkbox-2" class="custom-control-label">&nbsp;</label></div>';
                 $row[] = $list->nisn;
                 $row[] = $list->nama_siswa;
                 $row[] = $list->nama_kelas;

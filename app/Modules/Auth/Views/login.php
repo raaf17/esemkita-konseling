@@ -42,7 +42,14 @@
                                         </a>
                                     </div>
                                 </div>
-                                <input id="password" type="password" class="<?= ($validation->hasError('password')) ? 'is-invalid' : '' ?> form-control" name="password" id="password" value="<?= set_value('password'); ?>" placeholder="Password">
+                                <div class="input-group">
+                                    <input type="password" class="<?= ($validation->hasError('password')) ? 'is-invalid' : '' ?> form-control" name="password" id="password" value="<?= set_value('password'); ?>" placeholder="Password">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text toggle-password" style="cursor: pointer;">
+                                            <i class="fas fa-eye"></i>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="form-group">
@@ -64,4 +71,22 @@
         </div>
     </div>
 </section>
+<?= $this->endSection(); ?>
+<?= $this->section('scripts') ?>
+<script>
+    $(document).ready(function() {
+        $(".toggle-password").click(function() {
+            let passwordField = $("#password");
+            let icon = $(this).find("i");
+
+            if (passwordField.attr("type") === "password") {
+                passwordField.attr("type", "text");
+                icon.removeClass("fa-eye").addClass("fa-eye-slash");
+            } else {
+                passwordField.attr("type", "password");
+                icon.removeClass("fa-eye-slash").addClass("fa-eye");
+            }
+        });
+    });
+</script>
 <?= $this->endSection(); ?>

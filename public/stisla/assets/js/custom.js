@@ -5,4 +5,15 @@
  *
  */
 
-"use strict";
+// "use strict";
+
+document.addEventListener("DOMContentLoaded", function() {
+    let loadingBar = document.getElementById("loadingBar");
+    loadingBar.style.width = "100%";
+
+    window.addEventListener("load", function() {
+        setTimeout(() => {
+            loadingBar.style.width = "0%";
+        }, 500);
+    });
+});

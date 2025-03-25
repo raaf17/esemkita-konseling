@@ -42,7 +42,7 @@
     });
 
     var table = $('#data_users').DataTable({
-        "processing": true,
+        "processing": false,
         "serverSide": true,
         "order": [],
         "ajax": {
@@ -71,7 +71,7 @@
             }
         ],
         "language": {
-            "url": "<?= base_url() ?>/datatable/lang/indonesia.json"
+            "url": "<?= base_url('stisla') ?>/assets/lang/indonesia.json"
         }
     });
 

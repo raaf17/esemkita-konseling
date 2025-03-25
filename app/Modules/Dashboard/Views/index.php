@@ -1,95 +1,91 @@
 <?= $this->extend('App\Modules\Layouts\Views\app.php') ?>
 
 <?= $this->section('content') ?>
-<div class="main-content">
-    <section class="section">
+<div class="row">
+    <div class="col-lg-7">
+        <div class="section-header">
+            <h1>Dashboard</h1>
+        </div>
         <div class="row">
-            <div class="col-lg-7">
-                <div class="section-header">
-                    <h1>Dashboard</h1>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Aktifitas Konsultasi</h4>
-                                <div class="card-header-action">
-                                    <div class="btn-group">
-                                        <a href="#" class="btn btn-primary">Week</a>
-                                        <a href="#" class="btn">Month</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div id="chart"></div>
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Aktifitas Konsultasi</h4>
+                        <div class="card-header-action">
+                            <div class="btn-group">
+                                <a href="#" class="btn btn-primary">Week</a>
+                                <a href="#" class="btn">Month</a>
                             </div>
                         </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="chart"></div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-5 col-md-5 col-sm-12">
-                <div class="card card-statistic-2">
-                    <div class="card-header">
-                        <h5>Quick Data</h5>
+        </div>
+    </div>
+    <div class="col-lg-5 col-md-5 col-sm-12">
+        <div class="card card-statistic-2">
+            <div class="card-header">
+                <h5>Quick Data</h5>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card-icon shadow-primary bg-primary">
+                        <i class="fas fa-archive"></i>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="card-icon shadow-primary bg-primary">
-                                <i class="fas fa-archive"></i>
-                            </div>
-                            <div class="card-wrap">
-                                <div class="card-header">
-                                    <h4>Total Orders</h4>
-                                </div>
-                                <div class="card-body">
-                                    59
-                                </div>
-                            </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Total Orders</h4>
                         </div>
-                        <div class="col-lg-6">
-                            <div class="card-icon shadow-primary bg-primary">
-                                <i class="fas fa-archive"></i>
-                            </div>
-                            <div class="card-wrap">
-                                <div class="card-header">
-                                    <h4>Total Orders</h4>
-                                </div>
-                                <div class="card-body">
-                                    59
-                                </div>
-                            </div>
+                        <div class="card-body">
+                            59
                         </div>
-                        <div class="col-lg-6">
-                            <div class="card-icon shadow-primary bg-primary">
-                                <i class="fas fa-archive"></i>
-                            </div>
-                            <div class="card-wrap">
-                                <div class="card-header">
-                                    <h4>Total Orders</h4>
-                                </div>
-                                <div class="card-body">
-                                    59
-                                </div>
-                            </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card-icon shadow-primary bg-primary">
+                        <i class="fas fa-archive"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Total Orders</h4>
                         </div>
-                        <div class="col-lg-6">
-                            <div class="card-icon shadow-primary bg-primary">
-                                <i class="fas fa-archive"></i>
-                            </div>
-                            <div class="card-wrap">
-                                <div class="card-header">
-                                    <h4>Total Orders</h4>
-                                </div>
-                                <div class="card-body">
-                                    59
-                                </div>
-                            </div>
+                        <div class="card-body">
+                            59
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card-icon shadow-primary bg-primary">
+                        <i class="fas fa-archive"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Total Orders</h4>
+                        </div>
+                        <div class="card-body">
+                            59
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card-icon shadow-primary bg-primary">
+                        <i class="fas fa-archive"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Total Orders</h4>
+                        </div>
+                        <div class="card-body">
+                            59
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 </div>
 <?= $this->endSection() ?>
 <?= $this->section('scripts') ?>
@@ -177,7 +173,7 @@
             },
         ],
         "language": {
-            "url": "<?= base_url() ?>/datatable/lang/indonesia.json"
+            "url": "<?= base_url('stisla') ?>/assets/lang/indonesia.json"
         }
     });
 
@@ -325,37 +321,6 @@
                 toastr.error('Data tidak ditemukan');
             }
         }, 'json');
-    });
-
-    $(document).ready(function() {
-        var greetElem = document.getElementById("greetings");
-
-        if (!greetElem) {
-            console.error("Element with ID 'greetings' not found.");
-            return;
-        }
-
-        var curHr = new Date().getHours();
-        var userName = "<?= addslashes(get_user()->nama ?? 'User') ?>"; // Handle if $user is not set
-        var greetMes = [
-            `Wow! Masih Begadang? ${userName}`,
-            `Selamat Pagi, ${userName}`,
-            `Selamat Siang, ${userName}`,
-            `Selamat Sore, ${userName}`,
-            `Selamat Malam, ${userName}`,
-            `Belum Tidur ya? ${userName}`
-        ];
-
-        let greetText = "";
-
-        if (curHr < 4) greetText = greetMes[0];
-        else if (curHr < 10) greetText = greetMes[1];
-        else if (curHr < 16) greetText = greetMes[2];
-        else if (curHr < 18) greetText = greetMes[3];
-        else if (curHr < 22) greetText = greetMes[4];
-        else greetText = greetMes[5];
-
-        greetElem.textContent = greetText;
     });
 </script>
 <?= $this->endSection() ?>
