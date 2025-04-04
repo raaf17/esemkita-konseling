@@ -50,10 +50,10 @@ class MutasiController extends BaseController
                 $no++;
                 $row = [];
 
-                $buttonEdit = '<div class="d-flex"><a href="#" class="btn btn-sm btn-light-warning edit-mutasi-btn p-0 p-2 me-2" data-id="' . $list->id . '"><i class="ki-outline ki-notepad-edit fs-4"></i></a>';
-                $buttonDelete = '<a href="#" class="btn btn-sm btn-light-danger delete-mutasi-btn p-0 p-2" data-id="' . $list->id . '"><i class="ki-outline ki-basket fs-4"></i></a></div>';
+                $buttonEdit = '<div class="d-flex"><a href="#" class="btn btn-warning btn-action edit-mutasi-btn mr-1" data-id="' . $list->id . '"><i class="fas fa-pencil-alt"></i></a>';
+                $buttonDelete = '<a href="#" class="btn btn-danger delete-mutasi-btn" data-id="' . $list->id . '"><i class="fas fa-trash"></i></a></div>';
 
-                $row[] = '<div class="form-check form-check-sm form-check-custom form-check-solid"><input class="form-check-input check" type="checkbox" name="id[]" value="' . $list->id . '" /></div>';
+                $row[] = '<div class="custom-checkbox custom-control"><input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" name="id[]" value="' . $list->id . '"><label for="checkbox-2" class="custom-control-label">&nbsp;</label></div>';
                 $row[] = date('d F Y', strtotime($list->tanggal_diterima));
                 $row[] = $list->asal_sekolah;
                 $row[] = $list->no_surat;

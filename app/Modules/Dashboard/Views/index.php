@@ -2,10 +2,7 @@
 
 <?= $this->section('content') ?>
 <div class="row">
-    <div class="col-lg-7">
-        <div class="section-header">
-            <h1>Dashboard</h1>
-        </div>
+    <div class="col-lg-8">
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
@@ -19,13 +16,13 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div id="chart"></div>
+                        <canvas id="chart" style="height: 300px;"></canvas>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-lg-5 col-md-5 col-sm-12">
+    <div class="col-lg-4">
         <div class="card card-statistic-2">
             <div class="card-header">
                 <h5>Quick Data</h5>
@@ -106,33 +103,67 @@
                         nama_layanan.push(row.nama_layanan);
                     });
 
-                    var options = {
-                        series: [{
-                            name: 'Jumlah',
-                            type: 'column',
-                            data: jumlah
-                        }],
-                        chart: {
-                            height: 300,
-                            type: 'line'
+                    var ctx = document.getElementById("chart").getContext("2d");
+                    var chart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: nama_layanan,
+                            datasets: [{
+                                label: 'Jumlah',
+                                data: jumlah,
+                                borderColor: 'rgba(103,119,239,255)',
+                                backgroundColor: 'rgba(103,119,239,255)',
+                                borderWidth: 2,
+                                pointRadius: 5, // Dot size
+                                pointBackgroundColor: 'rgba(103,119,239,255)',
+                                pointBorderColor: 'white',
+                                pointBorderWidth: 2
+                            }]
                         },
-                        stroke: {
-                            width: [0, 4]
-                        },
-                        dataLabels: {
-                            enabled: true,
-                            enabledOnSeries: [1]
-                        },
-                        labels: nama_layanan,
-                        yaxis: [{
-                            title: {
-                                text: 'Jumlah'
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    display: true,
+                                    // position: 'top'
+                                },
+                                tooltip: {
+                                    enabled: true,
+                                    callbacks: {
+                                        label: function(tooltipItem) {
+                                            let value = tooltipItem.raw || 0;
+                                            return value
+                                        }
+                                    }
+                                },
+                                datalabels: {
+                                    anchor: 'end', // Position on top of the dot
+                                    align: 'top',
+                                    color: 'black',
+                                    font: {
+                                        weight: 'bold',
+                                        size: 12
+                                    },
+                                }
+                            },
+                            scales: {
+                                x: {
+                                    title: {
+                                        display: true,
+                                        text: 'Layanan'
+                                    }
+                                },
+                                y: {
+                                    title: {
+                                        display: true,
+                                        text: 'Jumlah'
+                                    },
+                                    beginAtZero: true
+                                }
                             }
-                        }]
-                    };
-
-                    var chart = new ApexCharts(document.querySelector("#chart"), options);
-                    chart.render();
+                        }
+                    });
                 } else {
                     console.error("Data tidak ditemukan");
                 }

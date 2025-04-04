@@ -1,7 +1,7 @@
 <?= $this->section('scripts') ?>
 <script>
     var table = $('#data_log').DataTable({
-        "processing": true,
+        "processing": false,
         "serverSide": true,
         "order": [],
         "ajax": {

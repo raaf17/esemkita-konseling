@@ -43,9 +43,9 @@ class LoginActivityController extends BaseController
                 $no++;
                 $row = [];
 
-                $buttonDelete = '<a href="#" class="btn btn-sm btn-light-danger delete-loginactivity-btn p-0 p-2" data-id="' . $list->id . '"><i class="ki-outline ki-basket fs-4"></i></a>';
+                $buttonDelete = '<a href="#" class="btn btn-danger delete-loginactivity-btn" data-id="' . $list->id . '"><i class="fas fa-trash"></i></a>';
 
-                $row[] = '<div class="form-check form-check-sm form-check-custom form-check-solid"><input class="form-check-input check" type="checkbox" name="id[]" value="' . $list->id . '" /></div>';
+                $row[] = '<div class="custom-checkbox custom-control"><input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" name="id[]" value="' . $list->id . '"><label for="checkbox-2" class="custom-control-label">&nbsp;</label></div>';
                 $row[] = $list->nama;
                 $row[] = $list->action;
                 $row[] = $list->ip;

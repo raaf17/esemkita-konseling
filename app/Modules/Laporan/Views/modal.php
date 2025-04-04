@@ -1,4 +1,4 @@
-<div class="modal fade" id="add-laporan-modal" tabindex="-1">
+<div class="modal fade" id="add-laporan-modal" tabindex="-1" data-backdrop="false">
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
@@ -50,7 +50,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="detail-laporan-modal" tabindex="-1">
+<div class="modal fade" id="detail-laporan-modal" tabindex="-1" data-backdrop="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -72,7 +72,7 @@
     </div>
 </div>
 
-<div class="modal fade" tabindex="-1" id="filter-tanggal-laporan-modal">
+<div class="modal fade" tabindex="-1" id="filter-tanggal-laporan-modal" data-backdrop="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

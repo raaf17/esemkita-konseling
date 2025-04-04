@@ -4,7 +4,7 @@
 
     $(function() {
         tablePending = $('#data_laporan_pending').DataTable({
-            "processing": true,
+            "processing": false,
             "serverSide": true,
             "order": [],
             "ajax": {
@@ -51,7 +51,7 @@
         $('a[href="#table_processed"]').on('shown.bs.tab', function() {
             if (!$.fn.DataTable.isDataTable('#data_laporan_processed')) {
                 tableProcessed = $('#data_laporan_processed').DataTable({
-                    "processing": true,
+                    "processing": false,
                     "serverSide": true,
                     "order": [],
                     "ajax": {
@@ -102,7 +102,7 @@
         $('a[href="#table_rejected"]').on('shown.bs.tab', function() {
             if (!$.fn.DataTable.isDataTable('#data_laporan_rejected')) {
                 tableRejected = $('#data_laporan_rejected').DataTable({
-                    "processing": true,
+                    "processing": false,
                     "serverSide": true,
                     "order": [],
                     "ajax": {
@@ -153,7 +153,7 @@
         $('a[href="#table_done"]').on('shown.bs.tab', function() {
             if (!$.fn.DataTable.isDataTable('#data_laporan_done')) {
                 tableDone = $('#data_laporan_done').DataTable({
-                    "processing": true,
+                    "processing": false,
                     "serverSide": true,
                     "order": [],
                     "ajax": {

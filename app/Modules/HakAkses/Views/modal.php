@@ -1,4 +1,4 @@
-<div class="modal fade" id="kt_modal_1" tabindex="-1">
+<div class="modal fade" id="kt_modal_1" tabindex="-1" data-backdrop="false">
     <div class="modal-dialog modal-dialog-scrollable mw-750px">
         <div class="modal-content">
             <div class="modal-header">

@@ -1,4 +1,4 @@
-<div class="modal fade" tabindex="-1" id="add-siswa-modal">
+<div class="modal fade" tabindex="-1" id="add-siswa-modal" data-backdrop="false">
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content" style="width: 800px; left: 50%; transform: translateX(-50%)">
             <div class="modal-header">
@@ -145,7 +145,7 @@
     </div>
 </div>
 
-<div class="modal fade" tabindex="-1" id="edit-siswa-modal">
+<div class="modal fade" tabindex="-1" id="edit-siswa-modal" data-backdrop="false">
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content" style="width: 800px; left: 50%; transform: translateX(-50%)">
             <div class="modal-header">
@@ -293,7 +293,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="detail-siswa-modal" tabindex="-1">
+<div class="modal fade" id="detail-siswa-modal" tabindex="-1" data-backdrop="false">
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
@@ -315,7 +315,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="import-siswa-modal" tabindex="-1">
+<div class="modal fade" id="import-siswa-modal" tabindex="-1" data-backdrop="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="card">

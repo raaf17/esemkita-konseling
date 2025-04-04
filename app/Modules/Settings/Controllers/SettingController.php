@@ -22,6 +22,12 @@ class SettingController extends BaseController
         return view('App\Modules\Settings\Views\index', $data);
     }
 
+    public function general()
+    {
+        $view = view('App\Modules\Settings\Views\general');
+        return $this->response->setJSON(['html' => $view]);
+    }
+
     public function updateGeneralSettings()
     {
         $request = \Config\Services::request();

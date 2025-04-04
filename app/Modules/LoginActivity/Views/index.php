@@ -1,61 +1,40 @@
 <?= $this->extend('App\Modules\Layouts\Views\app.php') ?>
 
 <?= $this->section('content') ?>
-<div class="row">
-    <div class="card">
-        <div class="card-header border-0 pt-6">
-            <div class="card-title">
-                <div>
-                    <h2 class="text-gray-800"><?= $title ?></h2>
-                    <span class="text-muted text-sm" style="font-size: small; font-weight: 400;">Data per tanggal : <?= date('d/m/Y - H:i') ?></span>
+<div class="section-body">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Data Pengguna Login</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <?= form_open('loginactivity/multipledelete', ['id' => 'bulk']) ?>
+                        <table class="table table-striped" id="data_log">
+                            <thead>
+                                <tr>
+                                    <th width="5%">
+                                        <div class="custom-checkbox custom-control">
+                                            <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad" class="custom-control-input" id="checkbox-all">
+                                            <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
+                                        </div>
+                                    </th>
+                                    <th>Nama Pengguna</th>
+                                    <th width="15%">Action</th>
+                                    <th>IP Address</th>
+                                    <th>Browser</th>
+                                    <th>Perangkat</th>
+                                    <th>Created at</th>
+                                    <th width="4%">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <?= form_close(); ?>
+                    </div>
                 </div>
             </div>
-            <div class="card-toolbar">
-                <div class="d-flex justify-content-end">
-                    <button type="button" class="btn btn-sm btn-light-success me-3 btn-flex btn-center" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                        <i class="ki-outline ki-some-files fs-3"></i> Excel <i class="ki-duotone ki-down fs-5 ms-1"></i>
-                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
-                            <div class="menu-item px-3">
-                                <a href="" class="menu-link px-3" id="export">
-                                    Export
-                                </a>
-                            </div>
-                            <div class="menu-item px-3">
-                                <a href="#" class="menu-link px-3" data-bs-toggle="modal" data-bs-target="#import-mutasi-modal">
-                                    Import
-                                </a>
-                            </div>
-                        </div>
-                    </button>
-                    <button type="button" class="btn btn-sm btn-light-danger" onclick="onMultipleDelete()">
-                        <i class="ki-outline ki-basket fs-3"></i> Hapus
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="card-body pt-0 table-responsive">
-            <?= form_open('loginactivity/multipledelete', ['id' => 'bulk']) ?>
-            <table class="table align-middle table-row-dashed fs-6 gy-4" id="data_log">
-                <thead>
-                    <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
-                        <th class="w-10px pe-2">
-                            <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                <input class="form-check-input select_all" name="checkbox" type="checkbox" />
-                            </div>
-                        </th>
-                        <th>Nama</th>
-                        <th width="15%">Action</th>
-                        <th>IP Address</th>
-                        <th>Browser</th>
-                        <th>Perangkat</th>
-                        <th>Created at</th>
-                        <th width="5%">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody class="fw-semibold text-gray-600">
-                </tbody>
-            </table>
-            <?= form_close(); ?>
         </div>
     </div>
 </div>

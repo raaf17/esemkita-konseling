@@ -1,6 +1,6 @@
-<div class="modal fade" tabindex="-1" role="dialog" id="modal_jurusan">
+<div class="modal fade" tabindex="-1" role="dialog" id="modal_jurusan" data-backdrop="false">
     <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content" style="z-index: 2051;">
+        <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -29,7 +29,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="import-jurusan-modal" tabindex="-1">
+<div class="modal fade" id="import-jurusan-modal" tabindex="-1" data-backdrop="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="card">

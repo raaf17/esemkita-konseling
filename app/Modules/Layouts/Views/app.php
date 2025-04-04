@@ -23,7 +23,8 @@
     <link rel="stylesheet" href="<?= base_url('stisla') ?>/node_modules/bootstrap-timepicker/css/bootstrap-timepicker.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>/sweetalert2/sweetalert2.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>/extra-assets/ijaboCropTool/ijaboCropTool.min.css">
-    <link rel="stylesheet" href="<?= base_url() ?>/apexcharts/dist/apexcharts.css">
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     </link>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://unpkg.com/nprogress@0.2.0/nprogress.css">
@@ -55,6 +56,7 @@
     </div>
 
     <div class="loading-bar" id="loadingBar"></div>
+    <div class="loader"></div>
 
     <!-- General JS Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
@@ -64,13 +66,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="<?= base_url('stisla') ?>/assets/js/stisla.js"></script>
     <script src="<?= base_url('stisla') ?>/node_modules/simpleweather/jquery.simpleWeather.min.js"></script>
-    <script src="<?= base_url('stisla') ?>/node_modules/chart.js/dist/Chart.min.js"></script>
     <script src="<?= base_url('stisla') ?>/node_modules/jqvmap/dist/jquery.vmap.min.js"></script>
     <script src="<?= base_url('stisla') ?>/node_modules/jqvmap/dist/maps/jquery.vmap.world.js"></script>
     <script src="<?= base_url('stisla') ?>/node_modules/summernote/dist/summernote-bs4.js"></script>
     <script src="<?= base_url('stisla') ?>/node_modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
-    <script src="<?= base_url('stisla') ?>/assets/js/scripts.js"></script>
-    <script src="<?= base_url('stisla') ?>/assets/js/custom.js"></script>
     <script src="<?= base_url('stisla') ?>/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="<?= base_url('stisla') ?>/node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="<?= base_url('stisla') ?>/node_modules/datatables.net-select-bs4/js/select.bootstrap4.min.js"></script>
@@ -78,9 +77,13 @@
     <script src="<?= base_url('stisla') ?>/node_modules/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
     <script src="<?= base_url('stisla') ?>/node_modules/select2/dist/js/select2.full.min.js"></script>
     <script src="<?= base_url('stisla') ?>/node_modules/selectric/public/jquery.selectric.min.js"></script>
+    <script src="<?= base_url('stisla') ?>/node_modules/chart.js/dist/Chart.min.js"></script>
+    <script src="<?= base_url('stisla') ?>/assets/js/scripts.js"></script>
+    <script src="<?= base_url('stisla') ?>/assets/js/custom.js"></script>
+    <script src="<?= base_url('stisla') ?>/assets/js/page/modules-chartjs.js"></script>
     <script src="<?= base_url() ?>/sweetalert2/sweetalert2.min.js"></script>
     <script src="<?= base_url() ?>/extra-assets/ijaboCropTool/ijaboCropTool.min.js"></script>
-    <script src="<?= base_url() ?>/apexcharts/dist/apexcharts.js"></script>
+    <!-- <script src="<?= base_url() ?>/apexcharts/dist/apexcharts.js"></script> -->
     <?= $this->renderSection('scripts') ?>
 </body>
 

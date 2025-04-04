@@ -66,19 +66,19 @@ class LaporanController extends BaseController
                 $row = [];
 
                 if ($list->status == 1 || $list->status == 2) {
-                    $buttonDetail = '<a href="#" class="btn btn-sm btn-light-primary btn-center p-0 p-2 detail-laporan-btn" data-id="' . $list->id . '"><i class="ki-outline ki-eye fs-4"></i></a>';
+                    $buttonDetail = '<a href="#" class="btn btn-primary detail-laporan-btn" data-id="' . $list->id . '"><i class="fas fa-eye"></i></a>';
                     $actionButtons = $buttonDetail;
                 } else {
-                    $buttonDetail = '<div class="d-flex"><a href="#" class="btn btn-sm btn-light-primary p-0 p-2 detail-laporan-btn me-2" data-id="' . $list->id . '"><i class="ki-outline ki-eye fs-4"></i></a>';
-                    $buttonDelete = '<a href="#" class="btn btn-sm btn-light-danger delete-laporan-btn p-0 p-2" data-id="' . $list->id . '"><i class="ki-outline ki-basket fs-4"></i></a></div>';
+                    $buttonDetail = '<div class="d-flex"><a href="#" class="btn btn-primary detail-laporan-btn mr-1" data-id="' . $list->id . '"><i class="fas fa-eye"></i></a>';
+                    $buttonDelete = '<a href="#" class="btn btn-danger delete-laporan-btn" data-id="' . $list->id . '"><i class="fas fa-trash"></i></a></div>';
 
                     $actionButtons = (get_user()->role == 'SuperAdmin' || get_user()->role == 'Guru') ?
-                        $buttonDetail . '<a href="#" class="btn btn-sm btn-light-success approve-laporan-btn me-2 p-0 p-2" data-id="' . $list->id . '"><i class="ki-outline ki-check-circle fs-4"></i></a>' .
-                        '<a href="#" class="btn btn-sm btn-light-danger unapprove-laporan-btn p-0 p-2" data-id="' . $list->id . '"><i class="ki-outline ki-cross-square fs-4"></i></a></div>' :
+                        $buttonDetail . '<a href="#" class="btn btn-success approve-laporan-btn mr-1" data-id="' . $list->id . '"><i class="fas fa-check-circle"></i></a>' .
+                        '<a href="#" class="btn btn-danger unapprove-laporan-btn" data-id="' . $list->id . '"><i class="fas fa-circle-xmark"></i></a></div>' :
                         $buttonDetail . $buttonDelete;
                 }
 
-                $row[] = '<div class="form-check form-check-sm form-check-custom form-check-solid"><input class="form-check-input" type="checkbox" value="1" /></div>';
+                $row[] = '<div class="custom-checkbox custom-control"><input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" name="id[]" value="' . $list->id . '"><label for="checkbox-2" class="custom-control-label">&nbsp;</label></div>';
                 $row[] = $list->nama_terlapor;
                 $row[] = $list->judul;
                 $row[] = Carbon::parse($list->tanggal)->format('M j, Y');

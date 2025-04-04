@@ -5,7 +5,6 @@ namespace App\Modules\KunjunganRumah\Controllers;
 use App\Controllers\BaseController;
 use App\Modules\Guru\Models\GuruModel;
 use App\Modules\Kelas\Models\KelasModel;
-use App\Modules\KunjunganRumah\Models\KunjunganRumahDoneModel;
 use App\Modules\KunjunganRumah\Models\KunjunganRumahModel;
 use App\Modules\Siswa\Models\SiswaModel;
 use Dompdf\Dompdf;
@@ -14,7 +13,7 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Carbon\Carbon;
 use Exception;
 
-class KunjunganRumah extends BaseController
+class KunjunganRumahController extends BaseController
 {
     protected $helpers = ['CIFunctions'];
     protected $kunjunganrumah;
@@ -67,16 +66,16 @@ class KunjunganRumah extends BaseController
                 $row = [];
 
                 if ($list->status == 1) {
-                    $buttonDetail = '<a href="#" class="btn btn-sm btn-light-primary btn-center p-0 p-2 detail-kunjunganrumah-btn" data-id="' . $list->id . '"><i class="ki-outline ki-eye fs-4"></i></a>';
+                    $buttonDetail = '<a href="#" class="btn btn-primary btn-center detail-kunjunganrumah-btn" data-id="' . $list->id . '"><i class="fas fa-eye"></i></a>';
                     $actionButtons = $buttonDetail;
                 } else {
-                    $buttonDetail = '<div class="d-flex"><a href="#" class="btn btn-sm btn-light-primary p-0 p-2 detail-kunjunganrumah-btn me-2" data-id="' . $list->id . '"><i class="ki-outline ki-eye fs-4"></i></a>';
-                    $buttonEdit = '<a href="#" class="btn btn-sm btn-light-warning btn-action edit-kunjunganrumah-btn p-0 p-2 me-2" data-id="' . $list->id . '"><i class="ki-outline ki-notepad-edit fs-4"></i></a>';
-                    $buttonDone = '<a href="#" class="btn btn-sm btn-light-success p-0 p-2 done-kunjunganrumah-btn me-2" data-id="' . $list->id . '"><i class="ki-outline ki-check-circle fs-4"></i></a>';
+                    $buttonDetail = '<div class="d-flex"><a href="#" class="btn btn-primary detail-kunjunganrumah-btn mr-1" data-id="' . $list->id . '"><i class="fas fa-eye"></i></a>';
+                    $buttonEdit = '<a href="#" class="btn btn-warning btn-action edit-kunjunganrumah-btn mr-1" data-id="' . $list->id . '"><i class="fas fa-pencil-alt"></i></a>';
+                    $buttonDone = '<a href="#" class="btn btn-success done-kunjunganrumah-btn mr-1" data-id="' . $list->id . '"><i class="fas fa-check-circle"></i></a>';
                     $actionButtons = $buttonDetail . $buttonEdit . $buttonDone;
                 }
 
-                $row[] = '<div class="form-check form-check-sm form-check-custom form-check-solid"><input class="form-check-input check" type="checkbox" name="id[]" value="' . $list->id . '" /></div>';
+                $row[] = '<div class="custom-checkbox custom-control"><input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" name="id[]" value="' . $list->id . '"><label for="checkbox-2" class="custom-control-label">&nbsp;</label></div>';
                 $row[] = $list->nama_siswa;
                 $row[] = $list->alamat;
                 $row[] = $list->anggota_keluarga;

@@ -4,7 +4,7 @@
 
     $(function() {
         tablePending = $('#data_konseling_pending').DataTable({
-            "processing": true,
+            "processing": false,
             "serverSide": true,
             "order": [],
             "ajax": {
@@ -51,7 +51,7 @@
         $('a[href="#tabel_disetujui"]').on('shown.bs.tab', function() {
             if (!$.fn.DataTable.isDataTable('#data_konseling_approve')) {
                 tableApproved = $('#data_konseling_approve').DataTable({
-                    "processing": true,
+                    "processing": false,
                     "serverSide": true,
                     "order": [],
                     "ajax": {
@@ -102,7 +102,7 @@
         $('a[href="#tabel_ditolak"]').on('shown.bs.tab', function() {
             if (!$.fn.DataTable.isDataTable('#data_konseling_unapprove')) {
                 tableUnapproved = $('#data_konseling_unapprove').DataTable({
-                    "processing": true,
+                    "processing": false,
                     "serverSide": true,
                     "order": [],
                     "ajax": {
@@ -153,7 +153,7 @@
         $('a[href="#tabel_selesai"]').on('shown.bs.tab', function() {
             if (!$.fn.DataTable.isDataTable('#data_konseling_done')) {
                 tableDone = $('#data_konseling_done').DataTable({
-                    "processing": true,
+                    "processing": false,
                     "serverSide": true,
                     "order": [],
                     "ajax": {

@@ -4,7 +4,7 @@
 
     $(function() {
         tablePending = $('#data_kunjungan_rumah_pending').DataTable({
-            "processing": true,
+            "processing": false,
             "serverSide": true,
             "order": [],
             "ajax": {
@@ -47,7 +47,7 @@
         $('a[href="#tabel_sudah_dikunjungi"]').on('shown.bs.tab', function() {
             if (!$.fn.DataTable.isDataTable('#data_kunjungan_rumah_done')) {
                 tableDone = $('#data_kunjungan_rumah_done').DataTable({
-                    "processing": true,
+                    "processing": false,
                     "serverSide": true,
                     "order": [],
                     "ajax": {

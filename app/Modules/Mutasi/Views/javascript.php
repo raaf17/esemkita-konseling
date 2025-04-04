@@ -61,7 +61,7 @@
     });
 
     var table = $('#data_mutasi').DataTable({
-        "processing": true,
+        "processing": false,
         "serverSide": true,
         "order": [],
         "ajax": {

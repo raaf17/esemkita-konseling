@@ -1,4 +1,4 @@
-<div class="modal fade" id="add-mutasi-modal" tabindex="-1">
+<div class="modal fade" id="add-mutasi-modal" tabindex="-1" data-backdrop="false">
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
@@ -59,7 +59,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="edit-mutasi-modal" tabindex="-1">
+<div class="modal fade" id="edit-mutasi-modal" tabindex="-1" data-backdrop="false">
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
@@ -119,7 +119,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="import-mutasi-modal" tabindex="-1">
+<div class="modal fade" id="import-mutasi-modal" tabindex="-1" data-backdrop="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="card">
@@ -154,7 +154,7 @@
     </div>
 </div>
 
-<div class="modal fade" tabindex="-1" id="filter-tanggal-mutasi-modal">
+<div class="modal fade" tabindex="-1" id="filter-tanggal-mutasi-modal" data-backdrop="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
