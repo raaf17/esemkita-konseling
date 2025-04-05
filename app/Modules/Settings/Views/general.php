@@ -19,7 +19,7 @@
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="umum" role="tabpanel">
                     <form class="form" action="<?= route_to('settings.updategeneralsetting') ?>" method="POST" id="general_settings_form">
-                        <input type="hidden" name="<?= csrf_token(); ?>" value="<?= csrf_hash(); ?>" class="ci_csrf_data">
+                        <input type="hidden" name="" value="" class="ci_csrf_data">
                         <div class="form-group row">
                             <label for="site-title" class="form-control-label col-lg-2 text-md-right">Meta Title :</label>
                             <div class="col-lg-10">
@@ -50,7 +50,7 @@
 
                 <div class="tab-pane fade" id="instansi" role="tabpanel">
                     <form class="form" action="<?= route_to('settings.updateschoolsetting') ?>" method="POST" id="school_settings_form">
-                        <input type="hidden" name="<?= csrf_token(); ?>" value="<?= csrf_hash(); ?>" class="ci_csrf_data">
+                        <input type="hidden" name="" value="" class="ci_csrf_data">
                         <div class="row">
                             <div class="col-lg-7">
                                 <div class="card">
@@ -140,7 +140,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <form action="<?= route_to('settings.updatelogosetting') ?>" method="POST" enctype="multipart/form-data" id="update_setting_logo">
-                                <input type="hidden" name="<?= csrf_token(); ?>" value="<?= csrf_hash(); ?>" class="ci_csrf_data">
+                                <input type="hidden" name="" value="" class="ci_csrf_data">
                                 <div class="form-group">
                                     <label for="setting_logo">Logo</label>
                                     <div class="custom-file">
@@ -156,7 +156,7 @@
                         </div>
                         <div class="col-lg-6">
                             <form action="<?= route_to('settings.updatefaviconsetting') ?>" method="POST" enctype="multipart/form-data" id="update_setting_favicon">
-                                <input type="hidden" name="<?= csrf_token(); ?>" value="<?= csrf_hash(); ?>" class="ci_csrf_data">
+                                <input type="hidden" name="" value="" class="ci_csrf_data">
                                 <div class="form-group">
                                     <label for="setting_favicon">Favicon</label>
                                     <div class="custom-file">

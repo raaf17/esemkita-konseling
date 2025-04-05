@@ -9,7 +9,7 @@
             </div>
 
             <form action="<?= route_to('kunjunganrumah.store') ?>" method="POST" id="add-kunjunganrumah-form">
-                <input type="hidden" name="<?= csrf_token(); ?>" value="<?= csrf_hash(); ?>" class="ci_csrf_data">
+                <input type="hidden" name="" value="" class="ci_csrf_data">
                 <div class="modal-body" style="max-height: calc(100vh - 200px); overflow-y: auto;">
                     <div class="card">
                         <div class="card-body">
@@ -147,7 +147,7 @@
             </div>
 
             <form action="<?= route_to('kunjunganrumah.update') ?>" method="POST" id="update-kunjunganrumah-form">
-                <input type="hidden" name="<?= csrf_token(); ?>" value="<?= csrf_hash(); ?>" class="ci_csrf_data">
+                <input type="hidden" name="" value="" class="ci_csrf_data">
                 <input type="hidden" name="id">
                 <div class="modal-body" style="max-height: calc(100vh - 200px); overflow-y: auto;">
                     <div class="card">
@@ -280,9 +280,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title">Detail Kunjungan Rumah</h3>
-                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-dismiss="modal" aria-label="Close">
-                    <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
-                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body" style="max-height: calc(100vh - 200px); overflow-y: auto;">
                 <table class="table table-condensed">

@@ -122,7 +122,7 @@
                     <div id="kt_account_settings_profile_details" class="collapse show">
                         <div class="card-body border-top p-9">
                             <form class="form" action="<?= route_to('profile.updateprofile') ?>" method="POST" id="change_password_form">
-                                <input type="hidden" name="<?= csrf_token(); ?>" value="<?= csrf_hash(); ?>" class="ci_csrf_data">
+                                <input type="hidden" name="" value="" class="ci_csrf_data">
                                 <div class="row mb-6">
                                     <label class="col-lg-4 col-form-label fw-semibold fs-6">Password Sekarang</label>
                                     <div class="col-lg-8 fv-row">

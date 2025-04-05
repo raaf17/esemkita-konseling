@@ -15,7 +15,7 @@
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade active show" id="umum" role="tabpanel">
         <form class="form" action="<?= route_to('settings.updategeneralsetting') ?>" method="POST" id="general_settings_form">
-            <input type="hidden" name="<?= csrf_token(); ?>" value="<?= csrf_hash(); ?>" class="ci_csrf_data">
+            <input type="hidden" name="" value="" class="ci_csrf_data">
             <div class="card">
                 <div class="card-header border-0 pt-6">
                     <div class="card-title">
@@ -80,7 +80,7 @@
 
     <div class="tab-pane fade" id="sekolah" role="tabpanel">
         <form class="form" action="<?= route_to('settings.updateschoolsetting') ?>" method="POST" id="school_settings_form">
-            <input type="hidden" name="<?= csrf_token(); ?>" value="<?= csrf_hash(); ?>" class="ci_csrf_data">
+            <input type="hidden" name="" value="" class="ci_csrf_data">
             <div class="row">
                 <div class="col-lg-7">
                     <div class="card">
@@ -212,7 +212,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <form action="<?= route_to('settings.updatelogosetting') ?>" method="POST" enctype="multipart/form-data" id="update_setting_logo">
-                            <input type="hidden" name="<?= csrf_token(); ?>" value="<?= csrf_hash(); ?>" class="ci_csrf_data">
+                            <input type="hidden" name="" value="" class="ci_csrf_data">
                             <div class="form-group">
                                 <label for="setting_logo">Logo</label>
                                 <input type="file" name="setting_logo" class="form-control mt-1">
@@ -232,7 +232,7 @@
                     </div>
                     <div class="col-lg-6">
                         <form action="<?= route_to('settings.updatefaviconsetting') ?>" method="POST" enctype="multipart/form-data" id="update_setting_favicon">
-                            <input type="hidden" name="<?= csrf_token(); ?>" value="<?= csrf_hash(); ?>" class="ci_csrf_data">
+                            <input type="hidden" name="" value="" class="ci_csrf_data">
                             <div class="form-group">
                                 <label for="setting_favicon">Favicon</label>
                                 <input type="file" name="setting_favicon" class="form-control mt-1">

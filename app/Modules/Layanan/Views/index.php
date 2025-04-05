@@ -10,7 +10,7 @@
                 </div>
                 <div class="card-body">
                     <form action="<?= route_to('layanan.store') ?>" method="POST" id="add-layanan-form" autocomplete="off">
-                        <input type="hidden" name="<?= csrf_token(); ?>" value="<?= csrf_hash(); ?>" class="ci_csrf_data">
+                        <input type="hidden" name="" value="" class="ci_csrf_data">
                         <div class="form-group">
                             <label for="nama_layanan">Nama Layanan</label>
                             <input type="text" name="nama_layanan" class="form-control mt-1" placeholder="Nama Layanan">

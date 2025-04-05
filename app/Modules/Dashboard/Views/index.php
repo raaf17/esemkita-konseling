@@ -23,61 +23,14 @@
         </div>
     </div>
     <div class="col-lg-4">
-        <div class="card card-statistic-2">
-            <div class="card-header">
-                <h5>Quick Data</h5>
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="card-icon shadow-primary bg-primary">
-                        <i class="fas fa-archive"></i>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Aktifitas Konsultasi</h4>
                     </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Total Orders</h4>
-                        </div>
-                        <div class="card-body">
-                            59
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="card-icon shadow-primary bg-primary">
-                        <i class="fas fa-archive"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Total Orders</h4>
-                        </div>
-                        <div class="card-body">
-                            59
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="card-icon shadow-primary bg-primary">
-                        <i class="fas fa-archive"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Total Orders</h4>
-                        </div>
-                        <div class="card-body">
-                            59
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="card-icon shadow-primary bg-primary">
-                        <i class="fas fa-archive"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Total Orders</h4>
-                        </div>
-                        <div class="card-body">
-                            59
-                        </div>
+                    <div class="card-body">
+                        <canvas id="doughnutChart" style="height: 300px;"></canvas>
                     </div>
                 </div>
             </div>
@@ -96,28 +49,24 @@
                 var jumlah = [];
                 var nama_layanan = [];
 
-                // Cek apakah data dalam response ada dan memiliki elemen
                 if (response.data && response.data.length > 0) {
                     $.each(response.data, function(i, row) {
                         jumlah.push(row.jumlah);
                         nama_layanan.push(row.nama_layanan);
                     });
 
-                    var ctx = document.getElementById("chart").getContext("2d");
-                    var chart = new Chart(ctx, {
-                        type: 'line',
+                    // BAR CHART
+                    var ctxBar = document.getElementById("chart").getContext("2d");
+                    var barChart = new Chart(ctxBar, {
+                        type: 'bar',
                         data: {
                             labels: nama_layanan,
                             datasets: [{
                                 label: 'Jumlah',
                                 data: jumlah,
-                                borderColor: 'rgba(103,119,239,255)',
-                                backgroundColor: 'rgba(103,119,239,255)',
-                                borderWidth: 2,
-                                pointRadius: 5, // Dot size
-                                pointBackgroundColor: 'rgba(103,119,239,255)',
-                                pointBorderColor: 'white',
-                                pointBorderWidth: 2
+                                backgroundColor: 'rgba(103,119,239,1)',
+                                borderColor: 'rgba(103,119,239,1)',
+                                borderWidth: 1
                             }]
                         },
                         options: {
@@ -125,27 +74,15 @@
                             maintainAspectRatio: false,
                             plugins: {
                                 legend: {
-                                    display: true,
-                                    // position: 'top'
+                                    display: true
                                 },
                                 tooltip: {
-                                    enabled: true,
                                     callbacks: {
                                         label: function(tooltipItem) {
-                                            let value = tooltipItem.raw || 0;
-                                            return value
+                                            return tooltipItem.raw;
                                         }
                                     }
                                 },
-                                datalabels: {
-                                    anchor: 'end', // Position on top of the dot
-                                    align: 'top',
-                                    color: 'black',
-                                    font: {
-                                        weight: 'bold',
-                                        size: 12
-                                    },
-                                }
                             },
                             scales: {
                                 x: {
@@ -155,15 +92,49 @@
                                     }
                                 },
                                 y: {
+                                    beginAtZero: true,
                                     title: {
                                         display: true,
                                         text: 'Jumlah'
-                                    },
-                                    beginAtZero: true
+                                    }
                                 }
                             }
                         }
                     });
+
+                    // DOUGHNUT CHART
+                    var ctxDoughnut = document.getElementById("doughnutChart").getContext("2d");
+                    var doughnutChart = new Chart(ctxDoughnut, {
+                        type: 'doughnut',
+                        data: {
+                            labels: nama_layanan,
+                            datasets: [{
+                                data: jumlah,
+                                backgroundColor: generateColors(jumlah.length),
+                                borderColor: '#fff',
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    position: 'bottom'
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(tooltipItem) {
+                                            let label = tooltipItem.label || '';
+                                            let value = tooltipItem.raw || 0;
+                                            return `${label}: ${value}`;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+
                 } else {
                     console.error("Data tidak ditemukan");
                 }
@@ -172,6 +143,19 @@
                 console.error("Terjadi kesalahan saat mengambil data:", error);
             }
         });
+
+        // Fungsi bantu: generate warna random untuk doughnut
+        function generateColors(count) {
+            const colors = [
+                '#6777ef', '#fc544b', '#63ed7a', '#ffa426',
+                '#3abaf4', '#47c363', '#e83e8c', '#6f42c1'
+            ];
+            let result = [];
+            for (let i = 0; i < count; i++) {
+                result.push(colors[i % colors.length]);
+            }
+            return result;
+        }
     });
 
     var table = $('#data_konseling_all').DataTable({

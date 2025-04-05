@@ -9,7 +9,7 @@
             </div>
 
             <form action="<?= route_to('siswa.store') ?>" method="POST" id="add-siswa-form">
-                <input type="hidden" name="<?= csrf_token(); ?>" value="<?= csrf_hash(); ?>" class="ci_csrf_data">
+                <input type="hidden" name="" value="" class="ci_csrf_data">
                 <div class="modal-body" style="max-height: calc(100vh - 200px); overflow-y: auto;">
                     <div class="card">
                         <div class="card-body">
@@ -156,7 +156,7 @@
             </div>
 
             <form action="<?= route_to('siswa.update') ?>" method="POST" id="update-siswa-form">
-                <input type="hidden" name="<?= csrf_token(); ?>" value="<?= csrf_hash(); ?>" class="ci_csrf_data">
+                <input type="hidden" name="" value="" class="ci_csrf_data">
                 <input type="hidden" name="id">
                 <div class="modal-body" style="max-height: calc(100vh - 200px); overflow-y: auto;">
                     <div class="card">
@@ -333,7 +333,7 @@
                 </div>
                 <div class="card-body">
                     <form action="<?= route_to('siswa.import') ?>" method="POST" id="import-siswa-form" enctype="multipart/form-data">
-                        <input type="hidden" name="<?= csrf_token(); ?>" value="<?= csrf_hash(); ?>" class="ci_csrf_data">
+                        <input type="hidden" name="" value="" class="ci_csrf_data">
                         <div class="form-group mb-5">
                             <label for="file">Pilih File</label>
                             <input type="file" class="form-control mt-2" name="file">

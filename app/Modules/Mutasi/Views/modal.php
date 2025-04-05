@@ -3,12 +3,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title">Tambah Data Mutasi</h3>
-                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-dismiss="modal" aria-label="Close">
-                    <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
-                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <form action="<?= route_to('mutasi.store') ?>" method="POST" id="add-mutasi-form">
-                <input type="hidden" name="<?= csrf_token(); ?>" value="<?= csrf_hash(); ?>" class="ci_csrf_data">
+                <input type="hidden" name="" value="" class="ci_csrf_data">
                 <div class="modal-body" style="max-height: calc(100vh - 200px); overflow-y: auto;">
                     <div class="form-group mb-3">
                         <label for="tanggal_diterima">Tanggal Diterima</label>
@@ -64,12 +64,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title">Edit Data Mutasi</h3>
-                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-dismiss="modal" aria-label="Close">
-                    <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
-                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <form action="<?= route_to('mutasi.update') ?>" method="POST" id="update-mutasi-form">
-                <input type="hidden" name="<?= csrf_token(); ?>" value="<?= csrf_hash(); ?>" class="ci_csrf_data">
+                <input type="hidden" name="" value="" class="ci_csrf_data">
                 <input type="hidden" name="id">
                 <div class="modal-body" style="max-height: calc(100vh - 200px); overflow-y: auto;">
                     <div class="form-group mb-3">
@@ -137,7 +137,7 @@
                 </div>
                 <div class="card-body">
                     <form action="<?= route_to('mutasi.import') ?>" method="POST" id="import-mutasi-form" enctype="multipart/form-data">
-                        <input type="hidden" name="<?= csrf_token(); ?>" value="<?= csrf_hash(); ?>" class="ci_csrf_data">
+                        <input type="hidden" name="" value="" class="ci_csrf_data">
                         <div class="form-group mb-5">
                             <label for="file">Pilih File</label>
                             <input type="file" class="form-control mt-2" name="file">

@@ -11,7 +11,7 @@
                 <div class="card-body">
                     <form action="" method="POST" id="jurusan_form" autocomplete="off">
                         <input type="hidden" name="" value="" class="ci_csrf_data">
-                        <input type="text" name="jurusan_id" hidden>
+                        <input type="text" name="id" hidden>
                         <div class="form-group mb-3">
                             <label for="nama_jurusan">Nama Jurusan</label>
                             <input type="text" name="nama_jurusan" class="form-control mt-1" placeholder="Nama Jurusan">
@@ -33,12 +33,14 @@
                 <div class="card-header">
                     <h4>Data Jurusan</h4>
                     <div class="card-header-action">
+                        <button type="button" class="btn btn-primary mr-1" onclick="onImport()"><i class="fas fa-file-import"></i> Import</button>
                         <button type="button" class="btn btn-success mr-1" onclick="onExport()"><i class="fa fa-file-excel"></i> Export</button>
                         <button type="button" class="btn btn-danger" onclick="onMultipleDelete()"><i class="fa fa-trash"></i> Hapus Banyak</button>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
+                        <?= form_open('jurusan/multipledelete', ['id' => 'bulk']) ?>
                         <table class="table table-striped" id="data_jurusan">
                             <thead>
                                 <tr>
@@ -55,6 +57,7 @@
                             </thead>
                             <tbody></tbody>
                         </table>
+                        <?= form_close(); ?>
                     </div>
                 </div>
             </div>

@@ -10,7 +10,7 @@
                 </div>
                 <div class="card-body">
                     <form action="<?= route_to('guru.store') ?>" method="POST" id="add-guru-form" autocomplete="off">
-                        <input type="hidden" name="<?= csrf_token(); ?>" value="<?= csrf_hash(); ?>" class="ci_csrf_data">
+                        <input type="hidden" name="" value="" class="ci_csrf_data">
                         <div class="form-group mb-3">
                             <label for="nama_guru">Nama Guru</label>
                             <div class="input-group">

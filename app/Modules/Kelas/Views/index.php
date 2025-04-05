@@ -8,10 +8,10 @@
                 <div class="card-header">
                     <h4>Data Kelas</h4>
                     <div class="card-header-action">
-                        <a href="#" class="btn btn-info mr-1"><i class="fa fa-file"></i> Import</a>
-                        <a href="#" class="btn btn-success mr-1"><i class="fa fa-file-excel"></i> Export</a>
-                        <button type="button" class="btn btn-primary mr-1" onclick="onAdd()"><i class="fa fa-plus-circle"></i> Tambah</button>
-                        <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus Banyak</button>
+                        <button type="button" class="btn btn-primary mr-1" onclick="onImport()"><i class="fas fa-file-import"></i> Import</button>
+                        <button type="button" class="btn btn-success mr-1" onclick="onExport()"><i class="fa fa-file-excel"></i> Export</button>
+                        <button type="button" class="btn btn-info mr-1" onclick="onAdd()"><i class="fa fa-plus-circle"></i> Tambah</button>
+                        <button type="button" class="btn btn-danger" onclick="onMultipleDelete()"><i class="fa fa-trash"></i> Hapus Banyak</button>
                     </div>
                 </div>
                 <div class="card-body">

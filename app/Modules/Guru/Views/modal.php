@@ -3,12 +3,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title">Edit Data guru</h3>
-                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-dismiss="modal" aria-label="Close">
-                    <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
-                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <form action="<?= route_to('guru.update') ?>" method="POST" id="update-guru-form">
-                <input type="hidden" name="<?= csrf_token(); ?>" value="<?= csrf_hash(); ?>" class="ci_csrf_data">
+                <input type="hidden" name="" value="" class="ci_csrf_data">
                 <input type="hidden" name="id">
                 <div class="modal-body">
                     <div class="form-group mb-3">
@@ -46,9 +46,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title">Detail Guru</h3>
-                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-dismiss="modal" aria-label="Close">
-                    <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
-                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <table class="table table-condensed">
@@ -81,7 +81,7 @@
                 </div>
                 <div class="card-body">
                     <form action="<?= route_to('guru.import') ?>" method="POST" id="import-guru-form" enctype="multipart/form-data">
-                        <input type="hidden" name="<?= csrf_token(); ?>" value="<?= csrf_hash(); ?>" class="ci_csrf_data">
+                        <input type="hidden" name="" value="" class="ci_csrf_data">
                         <div class="form-group mb-5">
                             <label for="file">Pilih File</label>
                             <input type="file" class="form-control mt-2" name="file">

@@ -23,7 +23,7 @@
                     </div>
                     <div class="card-body pt-0 pt-3">
                         <form action="<?= route_to('daftar_cek_masalah.store') ?>" method="POST" id="add-sub-masalah-form" autocomplete="off">
-                            <input type="hidden" name="<?= csrf_token(); ?>" value="<?= csrf_hash(); ?>" class="ci_csrf_data">
+                            <input type="hidden" name="" value="" class="ci_csrf_data">
                             <div class="form-group mb-3">
                                 <label for="nama_sub_masalah">Nama Masalah</label>
                                 <input type="text" name="nama_sub_masalah" class="form-control mt-1" placeholder="Nama Masalah">
@@ -121,7 +121,7 @@
                     </div>
                     <div class="card-body pt-0 pt-3">
                         <form action="<?= route_to('daftar_cek_masalah.storemain') ?>" method="POST" id="add-main-masalah-form" autocomplete="off">
-                            <input type="hidden" name="<?= csrf_token(); ?>" value="<?= csrf_hash(); ?>" class="ci_csrf_data">
+                            <input type="hidden" name="" value="" class="ci_csrf_data">
                             <div class="form-group mb-3">
                                 <label for="nama_main_masalah">Kelompok Masalah</label>
                                 <input type="text" name="nama_main_masalah" class="form-control mt-1" placeholder="Nama Masalah">

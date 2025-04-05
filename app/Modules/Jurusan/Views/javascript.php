@@ -48,7 +48,7 @@
             },
             dataType: 'json',
             success: function(response) {
-                $('input[name="jurusan_id"]').val(response.data.id);
+                $('input[name="id"]').val(response.data.id);
                 $('input[name="nama_jurusan"]').val(response.data.nama_jurusan);
                 $('[name=id_guru]').val(response.data.id_guru).change();
 
@@ -134,54 +134,10 @@
     };
 
     function onImport() {
-        var csrfName = $('.ci_csrf_data').attr('name');
-        var csrfHash = $('.ci_csrf_data').val();
-        var modal = $('body').find('div#import-jurusan-modal');
-        var form = this;
-        var formdata = new FormData(form);
-        formdata.append(csrfName, csrfHash);
-
-        $.ajax({
-            url: $(form).attr('action'),
-            method: $(form).attr('method'),
-            data: formdata,
-            processData: false,
-            dataType: 'json',
-            contentType: false,
-            cache: false,
-            beforeSend: function() {
-                toastr.remove();
-                $(form).find('span.error-text').text('');
-            },
-            success: function(response) {
-                // Update CSRF hash
-                $('.ci_csrf_data').val(response.token);
-
-                if ($.isEmptyObject(response.error)) {
-                    if (response.status == 1) {
-                        $(form)[0].reset();
-                        modal.modal('hide');
-                        toastr.success(response.msg);
-                        $('#data_jurusan').DataTable().ajax.reload(null, false);
-                    } else {
-                        toastr.error(response.msg);
-                    }
-                } else {
-                    $.each(response.error, function(prefix, val) {
-                        $(form).find('span.' + prefix + '_error').text(val);
-                    });
-                }
-            }
-        });
+        var modal = $('#import_jurusan_modal');
+        var card_title = 'Import Jurusan';
+        modal.modal('show');
     };
-
-    $(document).on('click', '.select_all', function(e) {
-        if ($(this).is(":checked")) {
-            $('.check').prop('checked', true);
-        } else {
-            $('.check').prop('checked', false);
-        }
-    });
 
     function onMultipleDelete() {
         let jumlahData = $('#data_jurusan tbody tr .check:checked');
@@ -209,6 +165,14 @@
             });
         }
     }
+
+    $(document).on('click', '.select_all', function(e) {
+        if ($(this).is(":checked")) {
+            $('.check').prop('checked', true);
+        } else {
+            $('.check').prop('checked', false);
+        }
+    });
 
     $("#bulk").on("submit", function(e) {
         e.preventDefault();

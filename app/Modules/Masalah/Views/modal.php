@@ -3,12 +3,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title">Edit Masalah</h3>
-                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-dismiss="modal" aria-label="Close">
-                    <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
-                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <form action="<?= route_to('masalah.update') ?>" method="POST" id="update-sub-masalah-form">
-                <input type="hidden" name="<?= csrf_token(); ?>" value="<?= csrf_hash(); ?>" class="ci_csrf_data">
+                <input type="hidden" name="" value="" class="ci_csrf_data">
                 <input type="hidden" name="id">
                 <div class="modal-body">
                     <div class="form-group mb-3">
@@ -41,12 +41,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title">Edit Masalah</h3>
-                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-dismiss="modal" aria-label="Close">
-                    <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
-                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <form action="<?= route_to('masalah.updatemain') ?>" method="POST" id="update-main-masalah-form">
-                <input type="hidden" name="<?= csrf_token(); ?>" value="<?= csrf_hash(); ?>" class="ci_csrf_data">
+                <input type="hidden" name="" value="" class="ci_csrf_data">
                 <input type="hidden" name="id">
                 <div class="modal-body">
                     <div class="form-group mb-3">
