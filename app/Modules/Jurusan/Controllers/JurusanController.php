@@ -507,7 +507,7 @@ class JurusanController extends BaseController
         $data = $this->guru
             ->select(['id', 'nama_guru'])
             ->orderBy('nama_guru', 'ASC')
-            ->findAll(); // lebih cocok daripada get()->getResult()
+            ->findAll();
 
         return $this->response->setJSON($data);
     }

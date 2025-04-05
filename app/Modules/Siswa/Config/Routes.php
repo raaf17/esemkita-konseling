@@ -12,5 +12,6 @@ $routes->group('', ['filter' => 'cifilter:auth'], static function ($routes) {
         $routes->post('import', 'SiswaController::import', ['as' => 'siswa.import']);
         $routes->get('getdetail', 'SiswaController::getDetail', ['as' => 'siswa.getdetail']);
         $routes->post('multipledelete', 'SiswaController::multipleDelete', ['as' => 'siswa.multipledelete']);
+        $routes->get('comboboxkelas', 'SiswaController::comboboxKelas', ['as' => 'siswa.comboboxkelas']);
     });
 });

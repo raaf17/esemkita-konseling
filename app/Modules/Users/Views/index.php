@@ -9,8 +9,9 @@
                     <h4>Tambah Pengguna</h4>
                 </div>
                 <div class="card-body">
-                    <form action="<?= route_to('users.store') ?>" method="POST" id="add-users-form" autocomplete="off">
+                    <form action="" method="POST" id="users_form" autocomplete="off">
                         <input type="hidden" name="" value="" class="ci_csrf_data">
+                        <input type="hidden" name="password_lama" value="">
                         <div class="form-group">
                             <label for="nama">Nama Pengguna</label>
                             <input type="text" name="nama" class="form-control mt-1" placeholder="Nama Pengguna">

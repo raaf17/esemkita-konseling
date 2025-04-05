@@ -55,8 +55,8 @@ class KelasController extends BaseController
                 $no++;
                 $row = [];
 
-                $buttonEdit = '<div class="d-flex"><a href="#" class="btn btn-warning btn-action edit-kelas-btn mr-1" data-id="' . $list->id . '"><i class="fas fa-pencil-alt"></i></a>';
-                $buttonDelete = '<a href="#" class="btn btn-danger delete-kelas-btn" data-id="' . $list->id . '"><i class="fas fa-trash"></i></a></div>';
+                $buttonEdit = '<div class="d-flex"><button type="button" class="btn btn-warning mr-1" onclick="onEdit(\'' . $list->id . '\')"><i class="fas fa-pencil-alt"></i></button>';
+                $buttonDelete = '<button type="button" class="btn btn-danger" onclick="onDelete(\'' . $list->id . '\')"><i class="fas fa-trash"></i></button></div>';
 
                 $row[] = '<div class="custom-checkbox custom-control"><input type="checkbox" class="custom-control-input check" name="id[]" value="' . $list->id . '"><label for="" class="custom-control-label"></label></div>';
                 $row[] = $list->nama_kelas;
@@ -158,7 +158,7 @@ class KelasController extends BaseController
             ];
 
             return $this->response->setJSON([
-                'data' => $data
+                'data' => $kelas
             ]);
         }
     }
@@ -507,7 +507,17 @@ class KelasController extends BaseController
         $data = $this->jurusan
             ->select(['id', 'nama_jurusan'])
             ->orderBy('nama_jurusan', 'ASC')
-            ->findAll(); // lebih cocok daripada get()->getResult()
+            ->findAll();
+
+        return $this->response->setJSON($data);
+    }
+
+    public function comboboxGuru()
+    {
+        $data = $this->guru
+            ->select(['id', 'nama_guru'])
+            ->orderBy('nama_guru', 'ASC')
+            ->findAll();
 
         return $this->response->setJSON($data);
     }

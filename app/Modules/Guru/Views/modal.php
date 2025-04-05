@@ -1,51 +1,8 @@
-<div class="modal fade" id="edit-guru-modal" tabindex="-1" data-backdrop="false">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Edit Data guru</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="<?= route_to('guru.update') ?>" method="POST" id="update-guru-form">
-                <input type="hidden" name="" value="" class="ci_csrf_data">
-                <input type="hidden" name="id">
-                <div class="modal-body">
-                    <div class="form-group mb-3">
-                        <label for="nama_guru">Nama Guru</label>
-                        <input type="text" name="nama_guru" class="form-control mt-1" placeholder="Nama Guru">
-                        <span class="text-danger error-text nama_guru_error"></span>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="nip">NIP</label>
-                        <input type="number" name="nip" class="form-control mt-1" placeholder="NIP">
-                        <span class="text-danger error-text nip_error"></span>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="tanggal_lahir">Tanggal Lahir</label>
-                        <input type="date" name="tanggal_lahir" class="form-control mt-1" placeholder="Tanggal Lahir">
-                        <span class="text-danger error-text tanggal_lahir_error"></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="no_handphone">No. Handphone</label>
-                        <input type="number" name="no_handphone" class="form-control mt-1" placeholder="No. Handphone">
-                        <span class="text-danger error-text no_handphone_error"></span>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
 <div class="modal fade" id="detail-guru-modal" tabindex="-1" data-backdrop="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">Detail Guru</h3>
+                <h5 class="modal-title">Detail Guru</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>

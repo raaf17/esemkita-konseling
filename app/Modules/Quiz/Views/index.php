@@ -9,7 +9,7 @@
                     <h4>Tambah Quesioner</h4>
                 </div>
                 <div class="card-body">
-                    <form action="<?= route_to('quiz.store') ?>" method="POST" id="add-quiz-form" autocomplete="off">
+                    <form action="" method="POST" id="quiz_form" autocomplete="off">
                         <input type="hidden" name="" value="" class="ci_csrf_data">
                         <div class="form-group">
                             <label for="quiz">Quiz</label>

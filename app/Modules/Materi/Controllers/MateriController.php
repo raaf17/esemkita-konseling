@@ -42,8 +42,8 @@ class MateriController extends BaseController
                 $no++;
                 $row = [];
 
-                $buttonEdit = '<div class="d-flex"><a href="#" class="btn btn-warning btn-action edit-materi-btn mr-1" data-id="' . $list->id . '"><i class="fas fa-pencil-alt"></i></a>';
-                $buttonDelete = '<a href="#" class="btn btn-danger delete-materi-btn" data-id="' . $list->id . '"><i class="fas fa-trash"></i></a></div>';
+                $buttonEdit = '<div class="d-flex"><button type="button" class="btn btn-warning mr-1" onclick="onEdit(\'' . $list->id . '\')"><i class="fas fa-pencil-alt"></i></button>';
+                $buttonDelete = '<button type="button" class="btn btn-danger delete-materi-btn" onclick="onDelete(\'' . $list->id . '\')"><i class="fas fa-trash"></i></button></div>';
 
                 $row[] = '<div class="custom-checkbox custom-control"><input type="checkbox" class="custom-control-input check" name="id[]" value="' . $list->id . '"><label for="" class="custom-control-label"></label></div>';
                 $row[] = $list->judul_materi;

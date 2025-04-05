@@ -44,9 +44,9 @@ class GuruController extends \CodeIgniter\Controller
                 $no++;
                 $row = [];
 
-                $buttonDetail = '<div class="d-flex"><a href="#" class="btn btn-info detail-guru-btn mr-1" data-id="' . $list->id . '"><i class="fas fa-eye"></i></a>';
-                $buttonEdit = '<a href="#" class="btn btn-warning btn-action edit-guru-btn mr-1" data-id="' . $list->id . '"><i class="fas fa-pencil-alt"></i></a>';
-                $buttonDelete = '<a href="#" class="btn btn-danger delete-guru-btn" data-id="' . $list->id . '"><i class="fas fa-trash"></i></a></div>';
+                $buttonDetail = '<div class="d-flex"><button type="button" class="btn btn-info mr-1" onclick="onDetail(\'' . $list->id . '\')"><i class="fas fa-eye"></i></button>';
+                $buttonEdit = '<button type="button" class="btn btn-warning btn-action mr-1" onclick="onEdit(\'' . $list->id . '\')"><i class="fas fa-pencil-alt"></i></button>';
+                $buttonDelete = '<button type="button" class="btn btn-danger" onclick="onDelete(\'' . $list->id . '\')"><i class="fas fa-trash"></i></button></div>';
 
                 $row[] = '<div class="custom-checkbox custom-control"><input type="checkbox" class="custom-control-input check" name="id[]" value="' . $list->id . '"><label for="" class="custom-control-label"></label></div>';
                 $row[] = $list->nama_guru;
@@ -150,7 +150,7 @@ class GuruController extends \CodeIgniter\Controller
             ];
 
             return $this->response->setJSON([
-                'data' => $data
+                'data' => $guru
             ]);
         }
     }

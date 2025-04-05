@@ -46,8 +46,8 @@ class UserController extends BaseController
                 $no++;
                 $row = [];
 
-                $buttonEdit = '<div class="d-flex"><a href="#" class="btn btn-warning btn-action edit-users-btn mr-1" data-id="' . $list->id . '"><i class="fas fa-pencil-alt"></i></a>';
-                $buttonDelete = '<a href="#" class="btn btn-danger delete-users-btn" data-id="' . $list->id . '"><i class="fas fa-trash"></i></a></div>';
+                $buttonEdit = '<div class="d-flex"><button type="button" class="btn btn-warning mr-1" onclick="onEdit(\'' . $list->id . '\')"><i class="fas fa-pencil-alt"></i></button>';
+                $buttonDelete = '<button type="button" class="btn btn-danger delete-users-btn" onclick="onDelete(\'' . $list->id . '\')"><i class="fas fa-trash"></i></button></div>';
 
                 $row[] = '<div class="custom-checkbox custom-control"><input type="checkbox" class="custom-control-input check" name="id[]" value="' . $list->id . '"><label for="" class="custom-control-label"></label></div>';
                 $row[] = $list->nama;
@@ -518,5 +518,15 @@ class UserController extends BaseController
         } else {
             throw new \CodeIgniter\Exceptions\PageNotFoundException();
         }
+    }
+
+    public function comboboxRole()
+    {
+        $data = $this->role
+            ->select(['role'])
+            ->orderBy('role', 'ASC')
+            ->findAll();
+
+        return $this->response->setJSON($data);
     }
 }

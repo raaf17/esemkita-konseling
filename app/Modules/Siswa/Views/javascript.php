@@ -1,70 +1,17 @@
 <?= $this->section('scripts') ?>
 <script>
-    $(document).on('click', '#add_siswa_btn', function(e) {
-        e.preventDefault();
-        var modal = $('body').find('div#add-siswa-modal');
-        var modal_title = 'Tambah Siswa';
-        var modal_btn_text = 'Simpan';
-        modal.find('.modal-title').html(modal_title);
-        modal.find('.modal-footer > button.action').html(modal_btn_text);
-        modal.find('input.error-text').html('');
-        modal.find('input[type="number"][name="nisn"]').val('');
-        modal.find('input[type="text"][name="nama_siswa"]').val('');
-        modal.find('select[name="nama_kelas"]').val('');
-        modal.find('select[name="jenis_kelamin"]').val('');
-        modal.find('input[type="text"][name="tempat_lahir"]').val('');
-        modal.find('input[type="date"][name="tanggal_lahir"]').val('');
-        modal.find('textarea[name="alamat"]').val('');
-        modal.find('input[type="number"][name="no_handphone"]').val('');
-        modal.find('select[name="agama"]').val('');
-        modal.find('input[type="number"][name="nama_ayah"]').val('');
-        modal.find('input[type="number"][name="nama_ibu"]').val('');
-        modal.find('select[name="status_keluarga"]').val('');
-        modal.modal('show');
-    });
-
-    $('#add-siswa-form').on('submit', function(e) {
-        e.preventDefault();
-        var csrfName = $('.ci_csrf_data').attr('name');
-        var csrfHash = $('.ci_csrf_data').val();
-        var form = this;
-        var modal = $('body').find('div#add-siswa-modal');
-        var formdata = new FormData(form);
-        formdata.append(csrfName, csrfHash);
-
-        $.ajax({
-            url: $(form).attr('action'),
-            method: $(form).attr('method'),
-            data: formdata,
-            processData: false,
-            dataType: 'json',
-            contentType: false,
-            cache: false,
-            beforeSend: function() {
-                toastr.remove();
-                $(form).find('span.error-text').text('');
-            },
-            success: function(response) {
-                // Update CSRF hash
-                $('.ci_csrf_data').val(response.token);
-
-                if ($.isEmptyObject(response.error)) {
-                    if (response.status == 1) {
-                        $(form)[0].reset();
-                        modal.modal('hide');
-                        toastr.success(response.msg);
-                        $('#data_siswa').DataTable().ajax.reload(null, false);
-                    } else {
-                        toastr.error(response.msg);
-                    }
-                } else {
-                    $.each(response.error, function(prefix, val) {
-                        $(form).find('span.' + prefix + '_error').text(val);
-                    });
-                }
-            }
+    $(function() {
+        HELPER.createCombo({
+            el: ['id_kelas'],
+            valueField: 'id',
+            displayField: 'nama_kelas',
+            url: '<?= route_to('siswa.comboboxkelas') ?>',
+            withNull: true,
+            grouped: false,
+            chosen: true,
+            callback: function() {}
         });
-    });
+    })
 
     var table = $('#data_siswa').DataTable({
         "processing": false,
@@ -108,82 +55,187 @@
         }
     });
 
-    $(document).on('click', '.edit-siswa-btn', function(e) {
-        e.preventDefault();
-        var id = $(this).data('id');
-        var url = "<?= route_to('siswa.getsiswa') ?>";
-        $.get(url, {
-            id: id
-        }, function(response) {
-            var modal_title = 'Edit Siswa';
-            var modal_btn_text = 'Simpan Perubahan';
-            var modal = $('body').find('div#edit-siswa-modal');
-            modal.find('form').find('input[type="hidden"][name="id"]').val(id);
-            modal.find('.modal-title').html(modal_title);
-            modal.find('.modal-footer > button.action').html(modal_btn_text);
-            modal.find('input[type="number"][name="nisn"]').val(response.data.nisn);
-            modal.find('input[type="text"][name="nama_siswa"]').val(response.data.nama_siswa);
-            modal.find('select[name="id_kelas"]').val(response.data.id_kelas);
-            modal.find('select[name="jenis_kelamin"]').val(response.data.jenis_kelamin);
-            modal.find('input[type="text"][name="tempat_lahir"]').val(response.data.tempat_lahir);
-            modal.find('input[type="date"][name="tanggal_lahir"]').val(response.data.tanggal_lahir);
-            modal.find('textarea[name="alamat"]').val(response.data.alamat);
-            modal.find('input[type="number"][name="no_handphone"]').val(response.data.no_handphone);
-            modal.find('select[name="agama"]').val(response.data.agama);
-            modal.find('input[type="text"][name="nama_ayah"]').val(response.data.nama_ayah);
-            modal.find('input[type="text"][name="nama_ibu"]').val(response.data.nama_ibu);
-            modal.find('select[name="status_keluarga"]').val(response.data.status_keluarga);
-            modal.find('span.error_text').html('');
-            modal.modal('show');
-        }, 'json');
-    });
+    function onAdd() {
+        var modal = $('#modal_siswa');
+        var modal_title = 'Tambah siswa';
+        var modal_btn_text = 'Simpan';
+        modal.find('.modal-title').html(modal_title);
+        modal.find('.modal-footer > button.action').html(modal_btn_text);
+        modal.find('input.error-text').html('');
+        modal.modal('show');
+    };
 
-    $('#update-siswa-form').on('submit', function(e) {
-        e.preventDefault();
-        // CSRF
-        var csrfName = $('.ci_csrf_data').attr('name'); // CSRF Token name
-        var csrfHash = $('.ci_csrf_data').val(); // CSRF Hash
-        var form = this;
-        var modal = $('body').find('div#edit-siswa-modal');
-        var formdata = new FormData(form);
-        formdata.append(csrfName, csrfHash);
+    function onDetail(id) {
+        $.ajax({
+            url: '<?= route_to('siswa.getdetail') ?>',
+            method: 'GET',
+            data: {
+                id: id
+            },
+            dataType: 'json',
+            success: function(response) {
+                if (response.data) {
+                    var modal_title = 'Detail Siswa';
+                    var modal = $('body').find('div#detail-siswa-modal');
+                    modal.find('.modal-title').html(modal_title);
+
+                    var jenis_kelamin = '';
+                    if (response.data.jenis_kelamin == 'L') {
+                        jenis_kelamin = 'Laki-laki';
+                    } else if (response.data.jenis_kelamin == 'P') {
+                        jenis_kelamin = 'Perempuan';
+                    }
+
+                    // Struktur tabel dengan nilai diisi dari response data
+                    modal.find('tbody#siswa-details').html(
+                        '<tr>' +
+                        '<td width="30%">NISN</td>' +
+                        '<td width="10%">:</td>' +
+                        '<td>' + response.data.nisn + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td width="30%">Nama Siswa</td>' +
+                        '<td width="10%">:</td>' +
+                        '<td>' + response.data.nama_siswa + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td width="30%">Nama Kelas</td>' +
+                        '<td width="10%">:</td>' +
+                        '<td>' + response.data.nama_kelas + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td width="30%">Jenis Kelamin</td>' +
+                        '<td width="10%">:</td>' +
+                        '<td>' + jenis_kelamin + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td width="30%">TTL</td>' +
+                        '<td width="10%">:</td>' +
+                        '<td>' + response.data.tempat_lahir + ', ' + response.data.tanggal_lahir + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td width="30%">Alamat</td>' +
+                        '<td width="10%">:</td>' +
+                        '<td>' + response.data.alamat + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td width="30%">Agama</td>' +
+                        '<td width="10%">:</td>' +
+                        '<td>' + response.data.agama + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td width="30%">Status Keluarga</td>' +
+                        '<td width="10%">:</td>' +
+                        '<td>' + response.data.status_keluarga + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td width="30%">Nama Ayah</td>' +
+                        '<td width="10%">:</td>' +
+                        '<td>' + response.data.nama_ayah + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td width="30%">Nama Ibu</td>' +
+                        '<td width="10%">:</td>' +
+                        '<td>' + response.data.nama_ibu + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td width="30%">No. Handphone</td>' +
+                        '<td width="10%">:</td>' +
+                        '<td>' + response.data.no_handphone + '</td>' +
+                        '</tr>'
+                    );
+                    modal.modal('show');
+                } else {
+                    toastr.error('Data tidak ditemukan');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log('An error occurred:', error);
+            }
+        });
+    }
+
+    function onEdit(id) {
+        $.ajax({
+            url: '<?= route_to('siswa.getsiswa') ?>',
+            method: 'GET',
+            data: {
+                id: id
+            },
+            dataType: 'json',
+            success: function(response) {
+                var modal = $('#modal_siswa');
+                var modal_title = 'Edit Siswa';
+                var modal_btn_text = 'Simpan';
+
+                modal.find('.modal-title').html(modal_title);
+                modal.find('.modal-footer > button.action').html(modal_btn_text);
+                modal.find('input[name="id"]').val(response.data.id);
+                modal.find('input[type="number"][name="nisn"]').val(response.data.nisn);
+                modal.find('input[type="text"][name="nama_siswa"]').val(response.data.nama_siswa);
+                modal.find('select[name="id_kelas"]').val(response.data.id_kelas);
+                modal.find('select[name="jenis_kelamin"]').val(response.data.jenis_kelamin);
+                modal.find('input[type="text"][name="tempat_lahir"]').val(response.data.tempat_lahir);
+                modal.find('input[type="date"][name="tanggal_lahir"]').val(response.data.tanggal_lahir);
+                modal.find('textarea[name="alamat"]').val(response.data.alamat);
+                modal.find('input[type="number"][name="no_handphone"]').val(response.data.no_handphone);
+                modal.find('select[name="agama"]').val(response.data.agama);
+                modal.find('input[type="text"][name="nama_ayah"]').val(response.data.nama_ayah);
+                modal.find('input[type="text"][name="nama_ibu"]').val(response.data.nama_ibu);
+                modal.find('select[name="status_keluarga"]').val(response.data.status_keluarga);
+                modal.find('input.error-text').html('');
+                modal.modal('show');
+
+                $('#save').text('Update');
+                $('#save').attr('onclick', 'onSave("update")');
+            },
+            error: function(xhr, status, error) {
+                console.log('An error occurred:', error);
+            }
+        });
+    }
+
+    function onSave(type) {
+        var csrfName = '<?= csrf_token(); ?>';
+        var csrfHash = '<?= csrf_hash(); ?>';
+        var form = document.getElementById('siswa_form');
+        var formData = new FormData(form);
+        formData.append(csrfName, csrfHash);
+
+        var url = '<?= route_to('siswa.store') ?>';
+        if (type === 'update') {
+            url = '<?= route_to('siswa.update') ?>';
+        }
 
         $.ajax({
-            url: $(form).attr('action'),
-            method: $(form).attr('method'),
-            data: formdata,
+            url: url,
+            method: 'POST',
+            data: formData,
             processData: false,
-            dataType: 'json',
             contentType: false,
+            dataType: 'json',
             cache: false,
-            beforeSend: function() {
-                toastr.remove();
-                $(form).find('span.error-text').text('');
-            },
             success: function(response) {
-                // Update CSRF hash
                 $('.ci_csrf_data').val(response.token);
-
                 if ($.isEmptyObject(response.error)) {
                     if (response.status == 1) {
-                        modal.modal('hide');
+                        form.reset();
+                        $('#id_guru').val(null).trigger('change');
                         toastr.success(response.msg);
                         $('#data_siswa').DataTable().ajax.reload(null, false);
                     } else {
                         toastr.error(response.msg);
                     }
                 } else {
-                    $.each(response.error, function(prefix, val) {
-                        $(form).find('span.' + prefix + '_error').text(val);
+                    $.each(response.error, function(key, val) {
+                        $('span.' + key + '_error').text(val);
                     });
                 }
             }
         });
-    });
+    }
 
-    $(document).on('click', '.delete-siswa-btn', function(e) {
-        e.preventDefault();
-        var id = $(this).data('id');
+    function onDelete(id) {
         var url = "<?= route_to('siswa.delete') ?>";
 
         Swal.fire({
@@ -209,148 +261,18 @@
                 }, 'json');
             }
         });
-    });
+    };
 
-    $(document).on('click', '#export', function(e) {
-        e.preventDefault();
+    function onExport() {
         window.location.href = '<?= route_to('siswa.export') ?>';
-    });
+    };
 
-    $('#import-siswa-form').on('submit', function(e) {
-        e.preventDefault();
-        var csrfName = $('.ci_csrf_data').attr('name');
-        var csrfHash = $('.ci_csrf_data').val();
-        var modal = $('body').find('div#import-siswa-modal');
-        var form = this;
-        var formdata = new FormData(form);
-        formdata.append(csrfName, csrfHash);
+    function onImport() {
+        var modal = $('#import_siswa_modal');
+        modal.modal('show');
 
-        $.ajax({
-            url: $(form).attr('action'),
-            method: $(form).attr('method'),
-            data: formdata,
-            processData: false,
-            dataType: 'json',
-            contentType: false,
-            cache: false,
-            beforeSend: function() {
-                toastr.remove();
-                $(form).find('span.error-text').text('');
-            },
-            success: function(response) {
-                // Update CSRF hash
-                $('.ci_csrf_data').val(response.token);
-
-                if ($.isEmptyObject(response.error)) {
-                    if (response.status == 1) {
-                        $(form)[0].reset();
-                        modal.modal('hide');
-                        toastr.success(response.msg);
-                        $('#data_siswa').DataTable().ajax.reload(null, false);
-                    } else {
-                        toastr.error(response.msg);
-                    }
-                } else {
-                    $.each(response.error, function(prefix, val) {
-                        $(form).find('span.' + prefix + '_error').text(val);
-                    });
-                }
-            }
-        });
-    });
-
-    $(document).on('click', '.detail-siswa-btn', function(e) {
-        e.preventDefault();
-        var id = $(this).data('id');
-        var url = "<?= route_to('siswa.getdetail') ?>";
-
-        $.get(url, {
-            id: id
-        }, function(response) {
-            if (response.data) {
-                var modal_title = 'Detail Siswa';
-                var modal = $('body').find('div#detail-siswa-modal');
-                modal.find('.modal-title').html(modal_title);
-
-                var jenis_kelamin = '';
-                if (response.data.jenis_kelamin == 'L') {
-                    jenis_kelamin = 'Laki-laki';
-                } else if (response.data.jenis_kelamin == 'P') {
-                    jenis_kelamin = 'Perempuan';
-                }
-
-                // Struktur tabel dengan nilai diisi dari response data
-                modal.find('tbody#siswa-details').html(
-                    '<tr>' +
-                    '<td width="30%">NISN</td>' +
-                    '<td width="10%">:</td>' +
-                    '<td>' + response.data.nisn + '</td>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td width="30%">Nama Siswa</td>' +
-                    '<td width="10%">:</td>' +
-                    '<td>' + response.data.nama_siswa + '</td>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td width="30%">Nama Kelas</td>' +
-                    '<td width="10%">:</td>' +
-                    '<td>' + response.data.nama_kelas + '</td>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td width="30%">Jenis Kelamin</td>' +
-                    '<td width="10%">:</td>' +
-                    '<td>' + jenis_kelamin + '</td>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td width="30%">TTL</td>' +
-                    '<td width="10%">:</td>' +
-                    '<td>' + response.data.tempat_lahir + ', ' + response.data.tanggal_lahir + '</td>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td width="30%">Alamat</td>' +
-                    '<td width="10%">:</td>' +
-                    '<td>' + response.data.alamat + '</td>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td width="30%">Agama</td>' +
-                    '<td width="10%">:</td>' +
-                    '<td>' + response.data.agama + '</td>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td width="30%">Status Keluarga</td>' +
-                    '<td width="10%">:</td>' +
-                    '<td>' + response.data.status_keluarga + '</td>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td width="30%">Nama Ayah</td>' +
-                    '<td width="10%">:</td>' +
-                    '<td>' + response.data.nama_ayah + '</td>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td width="30%">Nama Ibu</td>' +
-                    '<td width="10%">:</td>' +
-                    '<td>' + response.data.nama_ibu + '</td>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td width="30%">No. Handphone</td>' +
-                    '<td width="10%">:</td>' +
-                    '<td>' + response.data.no_handphone + '</td>' +
-                    '</tr>'
-                );
-                modal.modal('show');
-            } else {
-                toastr.error('Data tidak ditemukan');
-            }
-        }, 'json');
-    });
-
-    $(document).on('click', '.select_all', function(e) {
-        if ($(this).is(":checked")) {
-            $('.check').prop('checked', true);
-        } else {
-            $('.check').prop('checked', false);
-        }
-    });
+        $('#save').attr('onclick', 'onSave("update")');
+    };
 
     function onMultipleDelete() {
         let jumlahData = $('#data_siswa tbody tr .check:checked');
@@ -378,6 +300,14 @@
             });
         }
     }
+
+    $(document).on('click', '.select_all', function(e) {
+        if ($(this).is(":checked")) {
+            $('.check').prop('checked', true);
+        } else {
+            $('.check').prop('checked', false);
+        }
+    });
 
     $("#bulk").on("submit", function(e) {
         e.preventDefault();

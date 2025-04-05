@@ -1,46 +1,5 @@
 <?= $this->section('scripts') ?>
 <script>
-    $('#add-layanan-form').on('submit', function(e) {
-        e.preventDefault();
-        var csrfName = $('.ci_csrf_data').attr('name');
-        var csrfHash = $('.ci_csrf_data').val();
-        var form = this;
-        var formdata = new FormData(form);
-        formdata.append(csrfName, csrfHash);
-
-        $.ajax({
-            url: $(form).attr('action'),
-            method: $(form).attr('method'),
-            data: formdata,
-            processData: false,
-            dataType: 'json',
-            contentType: false,
-            cache: false,
-            beforeSend: function() {
-                toastr.remove();
-                $(form).find('span.error-text').text('');
-            },
-            success: function(response) {
-                // Update CSRF hash
-                $('.ci_csrf_data').val(response.token);
-
-                if ($.isEmptyObject(response.error)) {
-                    if (response.status == 1) {
-                        $(form)[0].reset();
-                        toastr.success(response.msg);
-                        $('#data_layanan').DataTable().ajax.reload(null, false);
-                    } else {
-                        toastr.error(response.msg);
-                    }
-                } else {
-                    $.each(response.error, function(prefix, val) {
-                        $(form).find('span.' + prefix + '_error').text(val);
-                    });
-                }
-            }
-        });
-    });
-
     var table = $('#data_layanan').DataTable({
         "processing": false,
         "serverSide": true,
@@ -63,71 +22,68 @@
         }
     });
 
-    $(document).on('click', '.edit-layanan-btn', function(e) {
-        e.preventDefault();
-        var id = $(this).data('id');
-        var url = "<?= route_to('layanan.getlayanan') ?>";
-        $.get(url, {
-            id: id
-        }, function(response) {
-            var modal_title = 'Edit Layanan';
-            var modal_btn_text = 'Simpan Perubahan';
-            var modal = $('body').find('div#edit-layanan-modal');
-            modal.find('form').find('input[type="hidden"][name="id"]').val(id);
-            modal.find('.modal-title').html(modal_title);
-            modal.find('.modal-footer > button.action').html(modal_btn_text);
-            modal.find('input[type="text"]').val(response.data.nama_layanan);
-            modal.find('span.error_text').html('');
-            modal.modal('show');
-        }, 'json');
-    });
+    function onEdit(id) {
+        $.ajax({
+            url: '<?= route_to('layanan.getlayanan') ?>',
+            method: 'GET',
+            data: {
+                id: id
+            },
+            dataType: 'json',
+            success: function(response) {
+                $('input[name="id"]').val(response.data.id);
+                $('input[name="nama_layanan"]').val(response.data.nama_layanan);
 
-    $('#update-layanan-form').on('submit', function(e) {
-        e.preventDefault();
-        // CSRF
-        var csrfName = $('.ci_csrf_data').attr('name'); // CSRF Token name
-        var csrfHash = $('.ci_csrf_data').val(); // CSRF Hash
-        var form = this;
-        var modal = $('body').find('div#edit-layanan-modal');
-        var formdata = new FormData(form);
-        formdata.append(csrfName, csrfHash);
+                $('#save').text('Update');
+                $('#save').attr('onclick', 'onSave("update")');
+            },
+            error: function(xhr, status, error) {
+                console.log('An error occurred:', error);
+            }
+        });
+    }
+
+    function onSave(type) {
+        var csrfName = '<?= csrf_token(); ?>';
+        var csrfHash = '<?= csrf_hash(); ?>';
+        var form = document.getElementById('layanan_form');
+        var formData = new FormData(form);
+        formData.append(csrfName, csrfHash);
+
+        var url = '<?= route_to('layanan.store') ?>';
+        if (type === 'update') {
+            url = '<?= route_to('layanan.update') ?>';
+        }
 
         $.ajax({
-            url: $(form).attr('action'),
-            method: $(form).attr('method'),
-            data: formdata,
+            url: url,
+            method: 'POST',
+            data: formData,
             processData: false,
-            dataType: 'json',
             contentType: false,
+            dataType: 'json',
             cache: false,
-            beforeSend: function() {
-                toastr.remove();
-                $(form).find('span.error-text').text('');
-            },
             success: function(response) {
-                // Update CSRF hash
                 $('.ci_csrf_data').val(response.token);
-
                 if ($.isEmptyObject(response.error)) {
                     if (response.status == 1) {
-                        modal.modal('hide');
+                        form.reset();
+                        $('#id_guru').val(null).trigger('change');
                         toastr.success(response.msg);
                         $('#data_layanan').DataTable().ajax.reload(null, false);
                     } else {
                         toastr.error(response.msg);
                     }
                 } else {
-                    $.each(response.error, function(prefix, val) {
-                        $(form).find('span.' + prefix + '_error').text(val);
+                    $.each(response.error, function(key, val) {
+                        $('span.' + key + '_error').text(val);
                     });
                 }
             }
         });
-    });
+    }
 
-    $(document).on('click', '.delete-layanan-btn', function(e) {
-        e.preventDefault();
-        var id = $(this).data('id');
+    function onDelete(id) {
         var url = "<?= route_to('layanan.delete') ?>";
 
         Swal.fire({
@@ -153,61 +109,18 @@
                 }, 'json');
             }
         });
-    });
+    };
 
-    $(document).on('click', '#export', function(e) {
-        e.preventDefault();
+    function onExport() {
         window.location.href = '<?= route_to('layanan.export') ?>';
-    });
+    };
 
-    $('#import-layanan-form').on('submit', function(e) {
-        e.preventDefault();
-        var csrfName = $('.ci_csrf_data').attr('name');
-        var csrfHash = $('.ci_csrf_data').val();
-        var form = this;
-        var formdata = new FormData(form);
-        formdata.append(csrfName, csrfHash);
+    function onImport() {
+        var modal = $('#import_layanan_modal');
+        modal.modal('show');
 
-        $.ajax({
-            url: $(form).attr('action'),
-            method: $(form).attr('method'),
-            data: formdata,
-            processData: false,
-            dataType: 'json',
-            contentType: false,
-            cache: false,
-            beforeSend: function() {
-                toastr.remove();
-                $(form).find('span.error-text').text('');
-            },
-            success: function(response) {
-                // Update CSRF hash
-                $('.ci_csrf_data').val(response.token);
-
-                if ($.isEmptyObject(response.error)) {
-                    if (response.status == 1) {
-                        $(form)[0].reset();
-                        toastr.success(response.msg);
-                        $('#data_layanan').DataTable().ajax.reload(null, false);
-                    } else {
-                        toastr.error(response.msg);
-                    }
-                } else {
-                    $.each(response.error, function(prefix, val) {
-                        $(form).find('span.' + prefix + '_error').text(val);
-                    });
-                }
-            }
-        });
-    });
-
-    $(document).on('click', '.select_all', function(e) {
-        if ($(this).is(":checked")) {
-            $('.check').prop('checked', true);
-        } else {
-            $('.check').prop('checked', false);
-        }
-    });
+        $('#save').attr('onclick', 'onSave("update")');
+    };
 
     function onMultipleDelete() {
         let jumlahData = $('#data_layanan tbody tr .check:checked');
@@ -235,6 +148,14 @@
             });
         }
     }
+
+    $(document).on('click', '.select_all', function(e) {
+        if ($(this).is(":checked")) {
+            $('.check').prop('checked', true);
+        } else {
+            $('.check').prop('checked', false);
+        }
+    });
 
     $("#bulk").on("submit", function(e) {
         e.preventDefault();

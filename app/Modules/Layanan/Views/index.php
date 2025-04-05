@@ -9,7 +9,7 @@
                     <h4>Tambah Layanan</h4>
                 </div>
                 <div class="card-body">
-                    <form action="<?= route_to('layanan.store') ?>" method="POST" id="add-layanan-form" autocomplete="off">
+                    <form action="" method="POST" id="layanan_form" autocomplete="off">
                         <input type="hidden" name="" value="" class="ci_csrf_data">
                         <div class="form-group">
                             <label for="nama_layanan">Nama Layanan</label>

@@ -135,8 +135,9 @@
 
     function onImport() {
         var modal = $('#import_jurusan_modal');
-        var card_title = 'Import Jurusan';
         modal.modal('show');
+
+        $('#save').attr('onclick', 'onSave("update")');
     };
 
     function onMultipleDelete() {

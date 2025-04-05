@@ -16,7 +16,7 @@
             el: ['id_guru'],
             valueField: 'id',
             displayField: 'nama_guru',
-            url: '<?= route_to('jurusan.comboboxguru') ?>',
+            url: '<?= route_to('kelas.comboboxguru') ?>',
             withNull: true,
             grouped: false,
             chosen: true,
@@ -73,10 +73,18 @@
             },
             dataType: 'json',
             success: function(response) {
-                $('input[name="id"]').val(response.data.id);
-                $('input[type="text"][name="nama_kelas"]').val(response.data.kelas.nama_kelas);
-                $('[name=id_jurusan]').val(response.data.id_jurusan).change();
-                $('[name=id_guru]').val(response.data.id_guru).change();
+                var modal = $('#modal_kelas');
+                var modal_title = 'Tambah Kelas';
+                var modal_btn_text = 'Simpan';
+
+                modal.find('.modal-title').html(modal_title);
+                modal.find('.modal-footer > button.action').html(modal_btn_text);
+                modal.find('input[name="id"]').val(response.data.id);
+                modal.find('input[type="text"][name="nama_kelas"]').val(response.data.nama_kelas);
+                modal.find('[name=id_jurusan]').val(response.data.id_jurusan).change();
+                modal.find('[name=id_guru]').val(response.data.id_guru).change();
+                modal.find('input.error-text').html('');
+                modal.modal('show');
 
                 $('#save').text('Update');
                 $('#save').attr('onclick', 'onSave("update")');
@@ -162,6 +170,8 @@
     function onImport() {
         var modal = $('#import_kelas_modal');
         modal.modal('show');
+
+        $('#save').attr('onclick', 'onSave("update")');
     };
 
     function onMultipleDelete() {

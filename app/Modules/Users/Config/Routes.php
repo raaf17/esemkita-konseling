@@ -11,5 +11,6 @@ $routes->group('', ['filter' => 'cifilter:auth'], static function ($routes) {
         $routes->get('export', 'UserController::export', ['as' => 'users.export']);
         $routes->post('import', 'UserController::import', ['as' => 'users.import']);
         $routes->post('multipledelete', 'UserController::multipleDelete', ['as' => 'users.multipledelete']);
+        $routes->get('comboboxrole', 'UserController::comboboxRole', ['as' => 'users.comboboxrole']);
     });
 });
