@@ -2,10 +2,10 @@
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content" style="width: 800px; left: 50%; transform: translateX(-50%)">
             <div class="modal-header">
-                <h3 class="modal-title">Tambah Data Siswa</h3>
-                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
-                    <i class="ki-duotone ki-cross fs-2x"><span class="path1"></span><span class="path2"></span></i>
-                </div>
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
 
             <form action="<?= route_to('siswa.store') ?>" method="POST" id="add-siswa-form">
@@ -137,8 +137,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
         </div>
@@ -149,10 +149,10 @@
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content" style="width: 800px; left: 50%; transform: translateX(-50%)">
             <div class="modal-header">
-                <h3 class="modal-title">Edit Data Siswa</h3>
-                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
-                    <i class="ki-duotone ki-cross fs-2x"><span class="path1"></span><span class="path2"></span></i>
-                </div>
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
 
             <form action="<?= route_to('siswa.update') ?>" method="POST" id="update-siswa-form">
@@ -285,8 +285,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
         </div>
@@ -297,10 +297,10 @@
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">Detail Siswa</h3>
-                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
-                    <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
-                </div>
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body" style="max-height: calc(100vh - 200px); overflow-y: auto;">
                 <table class="table table-condensed">
@@ -309,7 +309,7 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
             </div>
         </div>
     </div>
@@ -325,7 +325,7 @@
                     </div>
                     <div class="card-toolbar">
                         <div class="d-flex justify-content-end">
-                            <button class="btn btn-sm btn-light-success">
+                            <button class="btn btn-light-success">
                                 <i class="ki-duotone ki-exit-down"><span class="path1"></span><span class="path2"></span></i> Template
                             </button>
                         </div>
@@ -340,8 +340,8 @@
                             <span class="text-danger error_text file-error"></span>
                         </div>
                         <div class="d-flex justify-content-end">
-                            <button type="button" class="btn btn-sm btn-light me-2" data-bs-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
+                            <button type="button" class="btn btn-light me-2" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
                     </form>
                 </div>

@@ -11,5 +11,6 @@ $routes->group('', ['filter' => 'cifilter:auth'], static function ($routes) {
         $routes->get('export', 'JurusanController::export', ['as' => 'jurusan.export']);
         $routes->post('import', 'JurusanController::import', ['as' => 'jurusan.import']);
         $routes->post('multipledelete', 'JurusanController::multipleDelete', ['as' => 'jurusan.multipledelete']);
+        $routes->get('comboboxguru', 'JurusanController::comboboxGuru', ['as' => 'jurusan.comboboxguru']);
     });
 });

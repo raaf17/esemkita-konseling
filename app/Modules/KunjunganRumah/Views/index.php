@@ -84,14 +84,12 @@
     </div>
 </div>
 
-<div class="card card-primary mt-3" style="display: none;">
+<div class="card card-primary mt-3 pdf-card" style="display: none;">
     <div class="card-header">
-        <div class="card-title">
-            <h2 class="text-gray-800">Surat Panggilan Orang Tua</h2>
-        </div>
+        <h4>Surat Panggilan Orang Tua</h4>
     </div>
-    <div class="card-body" id="pdf">
-        <object data="" id="pdf-preview" type="application/pdf" width="100%" height="500"></object>
+    <div class="card-body" id="pdf_preview">
+        <object data="" type="application/pdf" width="100%" height="500"></object>
     </div>
 </div>
 <?php include('modal.php') ?>

@@ -11,5 +11,6 @@ $routes->group('', ['filter' => 'cifilter:auth'], static function ($routes) {
         $routes->get('export', 'KelasController::export', ['as' => 'kelas.export']);
         $routes->post('import', 'KelasController::import', ['as' => 'kelas.import']);
         $routes->post('multipledelete', 'KelasController::multipleDelete', ['as' => 'kelas.multipledelete']);
+        $routes->get('comboboxjurusan', 'KelasController::comboboxJurusan', ['as' => 'kelas.comboboxjurusan']);
     });
 });

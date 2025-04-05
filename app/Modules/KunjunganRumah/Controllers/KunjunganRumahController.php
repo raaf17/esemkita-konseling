@@ -15,7 +15,7 @@ use Exception;
 
 class KunjunganRumahController extends BaseController
 {
-    protected $helpers = ['CIFunctions'];
+    protected $helpers = ['CIFunctions', 'CIPdf'];
     protected $kunjunganrumah;
     protected $siswa;
     protected $kelas;
@@ -66,16 +66,18 @@ class KunjunganRumahController extends BaseController
                 $row = [];
 
                 if ($list->status == 1) {
+                    $buttonPdf = '<a href="#" class="btn btn-danger btn-center pdf-kunjunganrumah-btn mr-1" data-id="' . $list->id . '"><i class="fas fa-file-pdf"></i></a>';
                     $buttonDetail = '<a href="#" class="btn btn-primary btn-center detail-kunjunganrumah-btn" data-id="' . $list->id . '"><i class="fas fa-eye"></i></a>';
-                    $actionButtons = $buttonDetail;
+                    $actionButtons = $buttonPdf . $buttonDetail;
                 } else {
-                    $buttonDetail = '<div class="d-flex"><a href="#" class="btn btn-primary detail-kunjunganrumah-btn mr-1" data-id="' . $list->id . '"><i class="fas fa-eye"></i></a>';
+                    $buttonPdf = '<div class="d-flex"><a href="#" class="btn btn-danger btn-center pdf-kunjunganrumah-btn mr-1" data-id="' . $list->id . '"><i class="fas fa-file-pdf"></i></a>';
+                    $buttonDetail = '<a href="#" class="btn btn-primary detail-kunjunganrumah-btn mr-1" data-id="' . $list->id . '"><i class="fas fa-eye"></i></a>';
                     $buttonEdit = '<a href="#" class="btn btn-warning btn-action edit-kunjunganrumah-btn mr-1" data-id="' . $list->id . '"><i class="fas fa-pencil-alt"></i></a>';
                     $buttonDone = '<a href="#" class="btn btn-success done-kunjunganrumah-btn mr-1" data-id="' . $list->id . '"><i class="fas fa-check-circle"></i></a>';
-                    $actionButtons = $buttonDetail . $buttonEdit . $buttonDone;
+                    $actionButtons = $buttonPdf . $buttonDetail . $buttonEdit . $buttonDone;
                 }
 
-                $row[] = '<div class="custom-checkbox custom-control"><input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" name="id[]" value="' . $list->id . '"><label for="checkbox-2" class="custom-control-label">&nbsp;</label></div>';
+                $row[] = '<div class="custom-checkbox custom-control"><input type="checkbox" class="custom-control-input check" name="id[]" value="' . $list->id . '"><label for="" class="custom-control-label"></label></div>';
                 $row[] = $list->nama_siswa;
                 $row[] = $list->alamat;
                 $row[] = $list->anggota_keluarga;
@@ -655,10 +657,8 @@ class KunjunganRumahController extends BaseController
         $request = \Config\Services::request();
         $db = \Config\Database::connect();
 
-        // Ambil ID dari request
         $id = $request->getVar('id');
 
-        // Query data kunjungan rumah
         $data = $db->table('kunjungan_rumah')
             ->select('kunjungan_rumah.*, kelas.nama_kelas, guru.nama_guru, siswa.nama_siswa')
             ->join('kelas', 'kelas.id = kunjungan_rumah.id_kelas', 'left')
@@ -667,19 +667,15 @@ class KunjunganRumahController extends BaseController
             ->where('kunjungan_rumah.id', $id)
             ->get()->getRowObject();
 
-        // Jika data tidak ditemukan
         if (!$data) {
             return $this->response->setStatusCode(404)
                 ->setJSON(['error' => 'Data not found']);
         }
 
-        Carbon::setLocale('id');
-
         $hari = \Carbon\Carbon::parse($data->tanggal)->translatedFormat('l');
         $jam = \Carbon\Carbon::parse($data->jam)->format('H:i');
         $tanggal = \Carbon\Carbon::parse($data->tanggal)->format('d F Y');
 
-        // Generate HTML untuk PDF
         $html = '
             <!DOCTYPE html>
                     <html lang="id">
@@ -687,16 +683,6 @@ class KunjunganRumahController extends BaseController
                         <meta charset="UTF-8">
                         <meta name="viewport" content="width=device-width, initial-scale=1.0">
                         <title>Surat Panggilan Orang Tua</title>
-                        <style>
-                            body { font-family: Arial, sans-serif; line-height: 1.5; }
-                            .container { width: 650px; margin: 0 auto; padding: 20px; }
-                            .header { text-align: center; margin-bottom: 20px; }
-                            .header h3, .header h2, .title h2 { margin: 0; }
-                            .title { text-align: center; margin-bottom: 20px; }
-                            .content { margin-bottom: 40px; }
-                            table { width: 100%; margin-bottom: 20px; }
-                            .footer { margin-top: 40px; text-align: center; }
-                        </style>
                     </head>
                     <body>
                         <div class="container">
@@ -736,15 +722,16 @@ class KunjunganRumahController extends BaseController
                     </body>
                     </html>';
 
-        // Generate PDF
-        $dompdf = new \Dompdf\Dompdf();
-        $dompdf->loadHtml($html);
-        $dompdf->setPaper('A4', 'portrait');
-        $dompdf->render();
-
-        // Output the generated PDF (inline in browser)
-        return $this->response->setHeader('Content-Type', 'application/pdf')
-            ->setHeader('Content-Disposition', 'inline; filename="' . $data->nama_siswa . '.pdf"')
-            ->setBody($dompdf->output());
+        createPdf(array(
+            'data'          => $html,
+            'json'          => true,
+            'paper_size'    => 'LEGAL-L',
+            'file_name'     => 'Surat Panggilan Orang Tua',
+            'title'         => 'Surat Panggilan Orang Tua',
+            'stylesheet'    => ROOTPATH . './assets/letter/print.css',
+            'margin'        => '10 8 10 10',
+            'font_face'     => 'freesans',
+            'font_size'     => '8',
+        ));
     }
 }

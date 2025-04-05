@@ -10,15 +10,15 @@
                         <form class="form" action="<?= route_to('profile.updateprofilepicture') ?>" method="POST" id="userprofilepicture">
                             <div class="image-input image-input-circle ci-foto-preview" data-kt-image-input="true" style="background-image: url(/assets/media/svg/avatars/blank.svg)">
                                 <div class="image-input-wrapper w-125px h-125px ci-foto-preview" style="background-image: url('<?= get_user()->foto == null ? '/img/users/2.jpg' : '/img/users/' . get_user()->foto; ?>')"></div>
-                                <label class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" data-bs-dismiss="click">
+                                <label class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" data-dismiss="click">
                                     <input type="hidden" name="avatar_remove" />
                                     <a href="javascript:;" onclick="event.preventDefault();document.getElementById('user_profile_file').click();"><i class="ki-duotone ki-pencil fs-7"><span class="path1"></span><span class="path2"></span></i></a>
                                     <input type="file" name="user_profile_file" id="user_profile_file" class="d-none" style="opacity: 0;" />
                                 </label>
-                                <span class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" data-bs-dismiss="click" title="Cancel avatar">
+                                <span class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" data-dismiss="click" title="Cancel avatar">
                                     <i class="ki-outline ki-cross fs-3"></i>
                                 </span>
-                                <span class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" data-bs-dismiss="click">
+                                <span class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" data-dismiss="click">
                                     <i class="ki-outline ki-cross fs-3"></i>
                                 </span>
                             </div>

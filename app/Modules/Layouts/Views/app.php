@@ -23,9 +23,8 @@
     <link rel="stylesheet" href="<?= base_url('stisla') ?>/node_modules/bootstrap-timepicker/css/bootstrap-timepicker.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>/sweetalert2/sweetalert2.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>/extra-assets/ijaboCropTool/ijaboCropTool.min.css">
-    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
-    </link>
+    <link rel="stylesheet" href="<?= base_url() ?>/libs/toastr/build/toastr.css">
+    <link rel="stylesheet" href="<?= base_url('stisla') ?>/node_modules/select2/dist/css/select2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://unpkg.com/nprogress@0.2.0/nprogress.css">
     <script src="https://unpkg.com/nprogress@0.2.0/nprogress.js"></script>
@@ -56,10 +55,11 @@
     </div>
 
     <div class="loading-bar" id="loadingBar"></div>
-    <div class="loader"></div>
+    <!-- <div class="loader"></div> -->
 
     <!-- General JS Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script> -->
+    <script src="<?= base_url() ?>/jquery/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
@@ -80,10 +80,15 @@
     <script src="<?= base_url('stisla') ?>/node_modules/chart.js/dist/Chart.min.js"></script>
     <script src="<?= base_url('stisla') ?>/assets/js/scripts.js"></script>
     <script src="<?= base_url('stisla') ?>/assets/js/custom.js"></script>
-    <script src="<?= base_url('stisla') ?>/assets/js/page/modules-chartjs.js"></script>
+    <!-- <script src="<?= base_url('stisla') ?>/assets/js/page/modules-chartjs.js"></script> -->
     <script src="<?= base_url() ?>/sweetalert2/sweetalert2.min.js"></script>
+    <script src="<?= base_url() ?>/helpers/helper.js"></script>
+    <script src="<?= base_url() ?>/libs/toastr/toastr.js"></script>
     <script src="<?= base_url() ?>/extra-assets/ijaboCropTool/ijaboCropTool.min.js"></script>
     <!-- <script src="<?= base_url() ?>/apexcharts/dist/apexcharts.js"></script> -->
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="<?= base_url('stisla') ?>/node_modules/select2/dist/js/select2.full.min.js"></script>
     <?= $this->renderSection('scripts') ?>
 </body>
 

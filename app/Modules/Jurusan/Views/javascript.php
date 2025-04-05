@@ -1,55 +1,17 @@
 <?= $this->section('scripts') ?>
 <script>
-    function onAdd() {
-        var modal = $('#modal_jurusan');
-        var modal_title = 'Tambah Jurusan';
-        var modal_btn_text = 'Simpan';
-        modal.find('.modal-title').html(modal_title);
-        modal.find('.modal-footer > button.action').html(modal_btn_text);
-        modal.find('input.error-text').html('');
-        modal.modal('show');
-    };
-
-    $('#add-jurusan-form').on('submit', function(e) {
-        e.preventDefault();
-        var csrfName = $('.ci_csrf_data').attr('name');
-        var csrfHash = $('.ci_csrf_data').val();
-        var form = this;
-        var formdata = new FormData(form);
-        formdata.append(csrfName, csrfHash);
-
-        $.ajax({
-            url: $(form).attr('action'),
-            method: $(form).attr('method'),
-            data: formdata,
-            processData: false,
-            dataType: 'json',
-            contentType: false,
-            cache: false,
-            beforeSend: function() {
-                toastr.remove();
-                $(form).find('span.error-text').text('');
-            },
-            success: function(response) {
-                // Update CSRF hash
-                $('.ci_csrf_data').val(response.token);
-
-                if ($.isEmptyObject(response.error)) {
-                    if (response.status == 1) {
-                        $(form)[0].reset();
-                        toastr.success(response.msg);
-                        $('#data_jurusan').DataTable().ajax.reload(null, false);
-                    } else {
-                        toastr.error(response.msg);
-                    }
-                } else {
-                    $.each(response.error, function(prefix, val) {
-                        $(form).find('span.' + prefix + '_error').text(val);
-                    });
-                }
-            }
+    $(function() {
+        HELPER.createCombo({
+            el: ['id_guru'],
+            valueField: 'id',
+            displayField: 'nama_guru',
+            url: '<?= route_to('jurusan.comboboxguru') ?>',
+            withNull: true,
+            grouped: false,
+            chosen: true,
+            callback: function() {}
         });
-    });
+    })
 
     var table = $('#data_jurusan').DataTable({
         "processing": false,
@@ -77,72 +39,69 @@
         }
     });
 
-    $(document).on('click', '.edit-jurusan-btn', function(e) {
-        e.preventDefault();
-        var id = $(this).data('id');
-        var url = "<?= route_to('jurusan.getjurusan') ?>";
-        $.get(url, {
-            id: id
-        }, function(response) {
-            var modal_title = 'Edit Jurusan';
-            var modal_btn_text = 'Simpan Perubahan';
-            var modal = $('body').find('div#modal_jurusan');
-            modal.find('form').find('input[type="hidden"][name="id"]').val(id);
-            modal.find('.modal-title').html(modal_title);
-            modal.find('.modal-footer > button.action').html(modal_btn_text);
-            modal.find('input[type="text"][name="nama_jurusan"]').val(response.data.jurusan.nama_jurusan);
-            modal.find('select[name="id_guru"]').val(response.data.jurusan.id_guru);
-            modal.find('span.error_text').html('');
-            modal.modal('show');
-        }, 'json');
-    });
+    function onEdit(id) {
+        $.ajax({
+            url: '<?= route_to('jurusan.getjurusan') ?>',
+            method: 'GET',
+            data: {
+                id: id
+            },
+            dataType: 'json',
+            success: function(response) {
+                $('input[name="jurusan_id"]').val(response.data.id);
+                $('input[name="nama_jurusan"]').val(response.data.nama_jurusan);
+                $('[name=id_guru]').val(response.data.id_guru).change();
 
-    $('#update-jurusan-form').on('submit', function(e) {
-        e.preventDefault();
-        // CSRF
-        var csrfName = $('.ci_csrf_data').attr('name'); // CSRF Token name
-        var csrfHash = $('.ci_csrf_data').val(); // CSRF Hash
-        var form = this;
-        var modal = $('body').find('div#edit-jurusan-modal');
-        var formdata = new FormData(form);
-        formdata.append(csrfName, csrfHash);
+                $('#save').text('Update');
+                $('#save').attr('onclick', 'onSave("update")');
+            },
+            error: function(xhr, status, error) {
+                console.log('An error occurred:', error);
+            }
+        });
+    }
+
+    function onSave(type) {
+        var csrfName = '<?= csrf_token(); ?>';
+        var csrfHash = '<?= csrf_hash(); ?>';
+        var form = document.getElementById('jurusan_form');
+        var formData = new FormData(form);
+        formData.append(csrfName, csrfHash);
+
+        var url = '<?= route_to('jurusan.store') ?>';
+        if (type === 'update') {
+            url = '<?= route_to('jurusan.update') ?>';
+        }
 
         $.ajax({
-            url: $(form).attr('action'),
-            method: $(form).attr('method'),
-            data: formdata,
+            url: url,
+            method: 'POST',
+            data: formData,
             processData: false,
-            dataType: 'json',
             contentType: false,
+            dataType: 'json',
             cache: false,
-            beforeSend: function() {
-                toastr.remove();
-                $(form).find('span.error-text').text('');
-            },
             success: function(response) {
-                // Update CSRF hash
                 $('.ci_csrf_data').val(response.token);
-
                 if ($.isEmptyObject(response.error)) {
                     if (response.status == 1) {
-                        modal.modal('hide');
+                        form.reset();
+                        $('#id_guru').val(null).trigger('change');
                         toastr.success(response.msg);
                         $('#data_jurusan').DataTable().ajax.reload(null, false);
                     } else {
                         toastr.error(response.msg);
                     }
                 } else {
-                    $.each(response.error, function(prefix, val) {
-                        $(form).find('span.' + prefix + '_error').text(val);
+                    $.each(response.error, function(key, val) {
+                        $('span.' + key + '_error').text(val);
                     });
                 }
             }
         });
-    });
+    }
 
-    $(document).on('click', '.delete-jurusan-btn', function(e) {
-        e.preventDefault();
-        var id = $(this).data('id');
+    function onDelete(id) {
         var url = "<?= route_to('jurusan.delete') ?>";
 
         Swal.fire({
@@ -168,15 +127,13 @@
                 }, 'json');
             }
         });
-    });
+    };
 
-    $(document).on('click', '#export', function(e) {
-        e.preventDefault();
+    function onExport() {
         window.location.href = '<?= route_to('jurusan.export') ?>';
-    });
+    };
 
-    $('#import-jurusan-form').on('submit', function(e) {
-        e.preventDefault();
+    function onImport() {
         var csrfName = $('.ci_csrf_data').attr('name');
         var csrfHash = $('.ci_csrf_data').val();
         var modal = $('body').find('div#import-jurusan-modal');
@@ -216,7 +173,7 @@
                 }
             }
         });
-    });
+    };
 
     $(document).on('click', '.select_all', function(e) {
         if ($(this).is(":checked")) {

@@ -296,12 +296,26 @@
         }, 'json');
     });
 
-    // $(document).on('click', '.pdf-kunjunganrumah-btn', function(e) {
-    //     e.preventDefault();
-    //     var id = $(this).data('id');
-    //     var url = "<?= route_to('kunjunganrumah.getpdf') ?>";
-    //     window.open(url + '?id=' + id, '_blank');
-    // });
+    $(document).on('click', '.pdf-kunjunganrumah-btn', function(e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+
+        $.ajax({
+            url: '<?= route_to('kunjunganrumah.generatepdf') ?>',
+            data: {
+                id: id
+            },
+            type: 'post',
+            dataType: 'json',
+            success: function(res) {
+                if (res.success) {
+                    $('.pdf-card').show();
+                    $("#pdf_preview").show();
+                    $("#pdf_preview object").attr("data", res.record).show();
+                }
+            }
+        });
+    });
 
     $(document).on('click', '.edit-kunjunganrumah-btn', function(e) {
         e.preventDefault();

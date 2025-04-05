@@ -11,6 +11,6 @@ $routes->group('', ['filter' => 'cifilter:auth'], static function ($routes) {
         $routes->get('getkunjunganrumah', 'KunjunganRumahController::getKunjunganRumah', ['as' => 'kunjunganrumah.getkunjunganrumah']);
         $routes->post('update', 'KunjunganRumahController::update', ['as' => 'kunjunganrumah.update']);
         $routes->get('delete', 'KunjunganRumahController::delete', ['as' => 'kunjunganrumah.delete']);
-        $routes->post('getpdf', 'KunjunganRumahController::pdfSurat', ['as' => 'kunjunganrumah.getpdf']);
+        $routes->post('generatepdf', 'KunjunganRumahController::pdfSurat', ['as' => 'kunjunganrumah.generatepdf']);
     });
 });

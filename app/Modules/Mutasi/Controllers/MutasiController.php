@@ -53,7 +53,7 @@ class MutasiController extends BaseController
                 $buttonEdit = '<div class="d-flex"><a href="#" class="btn btn-warning btn-action edit-mutasi-btn mr-1" data-id="' . $list->id . '"><i class="fas fa-pencil-alt"></i></a>';
                 $buttonDelete = '<a href="#" class="btn btn-danger delete-mutasi-btn" data-id="' . $list->id . '"><i class="fas fa-trash"></i></a></div>';
 
-                $row[] = '<div class="custom-checkbox custom-control"><input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" name="id[]" value="' . $list->id . '"><label for="checkbox-2" class="custom-control-label">&nbsp;</label></div>';
+                $row[] = '<div class="custom-checkbox custom-control"><input type="checkbox" class="custom-control-input check" name="id[]" value="' . $list->id . '"><label for="" class="custom-control-label"></label></div>';
                 $row[] = date('d F Y', strtotime($list->tanggal_diterima));
                 $row[] = $list->asal_sekolah;
                 $row[] = $list->no_surat;

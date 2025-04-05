@@ -1,5 +1,39 @@
 <?= $this->section('scripts') ?>
 <script>
+    $(function() {
+        HELPER.createCombo({
+            el: ['id_jurusan'],
+            valueField: 'id',
+            displayField: 'nama_jurusan',
+            url: '<?= route_to('kelas.comboboxjurusan') ?>',
+            withNull: true,
+            grouped: false,
+            chosen: true,
+            callback: function() {}
+        });
+
+        HELPER.createCombo({
+            el: ['id_guru'],
+            valueField: 'id',
+            displayField: 'nama_guru',
+            url: '<?= route_to('jurusan.comboboxguru') ?>',
+            withNull: true,
+            grouped: false,
+            chosen: true,
+            callback: function() {}
+        });
+    })
+
+    function onAdd() {
+        var modal = $('#modal_kelas');
+        var modal_title = 'Tambah Kelas';
+        var modal_btn_text = 'Simpan';
+        modal.find('.modal-title').html(modal_title);
+        modal.find('.modal-footer > button.action').html(modal_btn_text);
+        modal.find('input.error-text').html('');
+        modal.modal('show');
+    };
+
     $('#add-kelas-form').on('submit', function(e) {
         e.preventDefault();
         var csrfName = $('.ci_csrf_data').attr('name');

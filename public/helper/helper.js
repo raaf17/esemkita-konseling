@@ -2178,89 +2178,221 @@ var HELPER = function () {
                 el: null,
                 valueField: null,
                 valueGroup: null,
+                valueAdd: null,
+                selectedField: null,
                 displayField: null,
                 displayField2: null,
                 displayField3: null,
                 url: null,
+                placeholder: '-Choose-',
+                optionCustom: null,
                 grouped: false,
                 withNull: true,
                 data: null,
                 chosen: false,
-                value: null,
+                sync: true,
+                disableField: null,
                 callback: function () { }
             }, config);
 
-            var myQueue = new Queue();
-            myQueue.enqueue(function (next) {
-                if (config.url !== null) {
-                    $.ajax({
-                        url: config.url,
-                        data: $.extend(config.data, { csrf_spi: $.cookie('csrf_lock_spi') }),
-                        type: 'POST',
-                        complete: function (response) {
-                            var html = (config.withNull === true) ? "<option value>-Pilih-</option>" : "";
-                            var data = $.parseJSON(response.responseText);
-                            if (data.success) {
-                                $.each(data.data, function (i, v) {
-                                    if (config.grouped) {
-                                        if (config.displayField3 != null) {
-                                            html += "<option value='" + v[config.valueField] + "'>" + v[config.displayField2] + " - " + v[config.displayField] + " ( " + v[config.displayField3] + " ) " + "</option>";
-                                        } else {
-                                            html += "<option value='" + v[config.valueField] + "'>" + v[config.displayField2] + " - " + v[config.displayField] + "</option>";
-                                        }
-                                    } else {
-                                        html += "<option value='" + v[config.valueField] + "'>" + v[config.displayField] + "</option>";
+            if (config.url !== null) {
+                $.ajax({
+                    url: config.url,
+                    data: $.extend(config.data),
+                    type: 'POST',
+                    async: config.sync,
+                    complete: function (response) {
+                        var html = (config.withNull === true) ? "<option value>" + config.placeholder + "</option>" : "";
+                        html += (config.optionCustom != null) ? "<option value='" + config.optionCustom.id + "'>" + config.optionCustom.name + "</option>" : "";
+                        var data = $.parseJSON(response.responseText);
+                        if (data.success) {
+                            $.each(data.data, function (i, v) {
+                                var selectedFix = '';
+                                var disable_field = '';
+                                if (config.disableField != null) {
+                                    if (v[config.disableField]) {
+                                        disable_field = 'disabled';
                                     }
-                                });
-                                if (config.el.constructor === Array) {
-                                    $.each(config.el, function (i, v) {
-                                        $('#' + v).html(html);
+                                }
+                                var sarr = Array.isArray(config.selectedField);
+                                if (sarr) {
+                                    $.each(config.selectedField, function (isf, vsf) {
+                                        if (vsf == v[config.valueField]) {
+                                            selectedFix = 'selected';
+                                        }
                                     })
                                 } else {
-                                    $('#' + config.el).html(html);
-                                }
-                                if (config.chosen) {
-                                    if (config.el.constructor === Array) {
-                                        $.each(config.el, function (i, v) {
-                                            $('#' + v).addClass(v);
-                                            $('.' + v).select2({
-                                                allowClear: true,
-                                                dropdownAutoWidth: true,
-                                                width: '100%',
-                                                placeholder: "-Pilih-",
-                                            });
-                                        })
+                                    if (Number.isInteger(config.selectedField)) {
+                                        if (config.selectedField == i) {
+                                            selectedFix = 'selected';
+                                            disable_field = '';
+                                        }
                                     } else {
-                                        $('#' + config.el).addClass(config.el);
-                                        $('.' + config.el).select2({
+                                        if (config.selectedField == v[config.valueField]) {
+                                            selectedFix = 'selected';
+                                            disable_field = '';
+                                        }
+                                    }
+                                }
+                                if (config.grouped) {
+                                    if (config.displayField3 != null) {
+                                        html += "<option " + selectedFix + " value='" + v[config.valueField] + "' data-add='" + v[config.valueAdd] + "'  " + disable_field + " >" + v[config.displayField] + " - " + v[config.displayField2] + " ( " + v[config.displayField3] + " ) " + "</option>";
+                                    } else {
+                                        html += "<option " + selectedFix + " value='" + v[config.valueField] + "' data-add='" + v[config.valueAdd] + "'  " + disable_field + " >" + v[config.displayField] + " - " + v[config.displayField2] + "</option>";
+                                    }
+                                } else {
+                                    var disable_field = '';
+                                    if (config.disableField != null) {
+                                        disable_field = 'disabled';
+                                    }
+                                    html += "<option " + selectedFix + " value='" + v[config.valueField] + "' data-add='" + v[config.valueAdd] + "' " + disable_field + " >" + v[config.displayField] + "</option>";
+                                }
+                            });
+                            if (config.el.constructor === Array) {
+                                $.each(config.el, function (i, v) {
+                                    $('#' + v).html(html);
+                                })
+                            } else {
+                                $('#' + config.el).html(html);
+                            }
+                            if (config.chosen) {
+                                if (config.el.constructor === Array) {
+                                    $.each(config.el, function (i, v) {
+                                        $('#' + v).addClass(v);
+                                        $('.' + v).select2({
                                             allowClear: true,
                                             dropdownAutoWidth: true,
                                             width: '100%',
-                                            placeholder: "-Pilih-",
+                                            placeholder: config.placeholder,
                                         });
-                                    }
+                                    })
+                                } else {
+                                    $('#' + config.el).addClass(config.el);
+                                    $('.' + config.el).select2({
+                                        allowClear: true,
+                                        dropdownAutoWidth: true,
+                                        width: '100%',
+                                        placeholder: config.placeholder,
+                                    });
+                                }
+                            } else {
+                                if (config.el.constructor === Array) {
+                                    $.each(config.el, function (i, v) {
+                                        $('#' + v).addClass(v);
+                                        $('.' + v).select2({
+                                            allowClear: true,
+                                            dropdownAutoWidth: true,
+                                            width: '100%',
+                                        });
+                                    })
+                                } else {
+                                    $('#' + config.el).addClass(config.el);
+                                    $('.' + config.el).select2({
+                                        allowClear: true,
+                                        dropdownAutoWidth: true,
+                                        width: '100%',
+                                    });
                                 }
                             }
-                            config.callback(data);
                         }
-                    });
-                } else {
-                    var response = { success: false, message: 'Url kosong' };
-                    config.callback(response);
-                }
-                next()
-            }, 'first').enqueue(function (next) {
-                if (config.value != null) {
-                    setTimeout(() => {
-                        if (config.chosen) {
-                            $('#' + config.el).val(config.value).trigger('change.select2');
-                        } else {
-                            $('#' + config.el).val(config.value).trigger('change');
-                        }
-                    }, 600);
-                }
-            }, 'second').dequeueAll();
+                        config.callback(data);
+                    }
+                });
+            }
+            else {
+                var response = { success: false, message: 'Url kosong' };
+                config.callback(response);
+            }
         },
+
+        // createCombo: function (config) {
+        //     config = $.extend(true, {
+        //         el: null,
+        //         valueField: null,
+        //         valueGroup: null,
+        //         displayField: null,
+        //         displayField2: null,
+        //         displayField3: null,
+        //         url: null,
+        //         grouped: false,
+        //         withNull: true,
+        //         data: null,
+        //         chosen: false,
+        //         value: null,
+        //         callback: function () { }
+        //     }, config);
+
+        //     var myQueue = new Queue();
+        //     myQueue.enqueue(function (next) {
+        //         if (config.url !== null) {
+        //             $.ajax({
+        //                 url: config.url,
+        //                 data: $.extend(config.data, { csrf_spi: $.cookie('csrf_lock_spi') }),
+        //                 type: 'POST',
+        //                 complete: function (response) {
+        //                     var html = (config.withNull === true) ? "<option value>-Pilih-</option>" : "";
+        //                     var data = $.parseJSON(response.responseText);
+        //                     if (data.success) {
+        //                         $.each(data.data, function (i, v) {
+        //                             if (config.grouped) {
+        //                                 if (config.displayField3 != null) {
+        //                                     html += "<option value='" + v[config.valueField] + "'>" + v[config.displayField2] + " - " + v[config.displayField] + " ( " + v[config.displayField3] + " ) " + "</option>";
+        //                                 } else {
+        //                                     html += "<option value='" + v[config.valueField] + "'>" + v[config.displayField2] + " - " + v[config.displayField] + "</option>";
+        //                                 }
+        //                             } else {
+        //                                 html += "<option value='" + v[config.valueField] + "'>" + v[config.displayField] + "</option>";
+        //                             }
+        //                         });
+        //                         if (config.el.constructor === Array) {
+        //                             $.each(config.el, function (i, v) {
+        //                                 $('#' + v).html(html);
+        //                             })
+        //                         } else {
+        //                             $('#' + config.el).html(html);
+        //                         }
+        //                         if (config.chosen) {
+        //                             if (config.el.constructor === Array) {
+        //                                 $.each(config.el, function (i, v) {
+        //                                     $('#' + v).addClass(v);
+        //                                     $('.' + v).select2({
+        //                                         allowClear: true,
+        //                                         dropdownAutoWidth: true,
+        //                                         width: '100%',
+        //                                         placeholder: "-Pilih-",
+        //                                     });
+        //                                 })
+        //                             } else {
+        //                                 $('#' + config.el).addClass(config.el);
+        //                                 $('.' + config.el).select2({
+        //                                     allowClear: true,
+        //                                     dropdownAutoWidth: true,
+        //                                     width: '100%',
+        //                                     placeholder: "-Pilih-",
+        //                                 });
+        //                             }
+        //                         }
+        //                     }
+        //                     config.callback(data);
+        //                 }
+        //             });
+        //         } else {
+        //             var response = { success: false, message: 'Url kosong' };
+        //             config.callback(response);
+        //         }
+        //         next()
+        //     }, 'first').enqueue(function (next) {
+        //         if (config.value != null) {
+        //             setTimeout(() => {
+        //                 if (config.chosen) {
+        //                     $('#' + config.el).val(config.value).trigger('change.select2');
+        //                 } else {
+        //                     $('#' + config.el).val(config.value).trigger('change');
+        //                 }
+        //             }, 600);
+        //         }
+        //     }, 'second').dequeueAll();
+        // },
 
         createGroupCombo: function (config) {
             config = $.extend(true, {

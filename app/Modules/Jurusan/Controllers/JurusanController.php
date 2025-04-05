@@ -51,10 +51,10 @@ class JurusanController extends BaseController
                 $no++;
                 $row = [];
 
-                $buttonEdit = '<div class="d-flex"><a href="#" class="btn btn-warning btn-action edit-jurusan-btn mr-1" data-id="' . $list->id . '"><i class="fas fa-pencil-alt"></i></a>';
-                $buttonDelete = '<a href="#" class="btn btn-danger delete-jurusan-btn" data-id="' . $list->id . '"><i class="fas fa-trash"></i></a></div>';
+                $buttonEdit = '<div class="d-flex"><button type="button" class="btn btn-warning mr-1" onclick="onEdit(\'' . $list->id . '\')"><i class="fas fa-pencil-alt"></i></button>';
+                $buttonDelete = '<button type="button" class="btn btn-danger" onclick="onDelete(\'' . $list->id . '\')"><i class="fas fa-trash"></i></a></div>';
 
-                $row[] = '<div class="custom-checkbox custom-control"><input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" name="id[]" value="' . $list->id . '"><label for="checkbox-2" class="custom-control-label">&nbsp;</label></div>';
+                $row[] = '<div class="custom-checkbox custom-control"><input type="checkbox" class="custom-control-input check" name="id[]" value="' . $list->id . '"><label for="" class="custom-control-label"></label></div>';
                 $row[] = $list->nama_jurusan;
                 $row[] = $list->nama_guru;
 
@@ -91,7 +91,7 @@ class JurusanController extends BaseController
                 'id_guru' => [
                     'rules' => 'required',
                     'errors' => [
-                        'required' => 'Nama jurusan harus diisi',
+                        'required' => 'Nama kepala jurusan harus diisi',
                     ]
                 ]
             ]);
@@ -145,7 +145,7 @@ class JurusanController extends BaseController
             ];
 
             return $this->response->setJSON([
-                'data' => $data
+                'data' => $jurusan
             ]);
         }
     }
@@ -500,5 +500,15 @@ class JurusanController extends BaseController
         } else {
             throw new \CodeIgniter\Exceptions\PageNotFoundException();
         }
+    }
+
+    public function comboboxGuru()
+    {
+        $data = $this->guru
+            ->select(['id', 'nama_guru'])
+            ->orderBy('nama_guru', 'ASC')
+            ->findAll(); // lebih cocok daripada get()->getResult()
+
+        return $this->response->setJSON($data);
     }
 }

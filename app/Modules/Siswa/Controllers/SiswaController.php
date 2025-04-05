@@ -58,7 +58,7 @@ class SiswaController extends BaseController
                 $buttonEdit = '<a href="#" class="btn btn-warning btn-action edit-siswa-btn mr-1" data-id="' . $list->id . '"><i class="fas fa-pencil-alt"></i></a>';
                 $buttonDelete = '<a href="#" class="btn btn-danger delete-siswa-btn" data-id="' . $list->id . '"><i class="fas fa-trash"></i></a></div>';
 
-                $row[] = '<div class="custom-checkbox custom-control"><input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" name="id[]" value="' . $list->id . '"><label for="checkbox-2" class="custom-control-label">&nbsp;</label></div>';
+                $row[] = '<div class="custom-checkbox custom-control"><input type="checkbox" class="custom-control-input check" name="id[]" value="' . $list->id . '"><label for="" class="custom-control-label"></label></div>';
                 $row[] = $list->nisn;
                 $row[] = $list->nama_siswa;
                 $row[] = $list->nama_kelas;
