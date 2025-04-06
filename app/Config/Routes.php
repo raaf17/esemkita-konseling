@@ -26,3 +26,20 @@ if (file_exists(APPPATH . 'Modules')) {
 		}
 	}
 }
+
+if (file_exists(APPPATH . 'Client')) {
+	$clientPath = APPPATH . 'Client/';
+	$client = scandir($clientPath);
+
+	foreach ($client as $module) {
+		if ($module === '.' || $module === '..') continue;
+		if (is_dir($clientPath) . '/' . $module) {
+			$routesPath = $clientPath . $module . '/Config/Routes.php';
+			if (file_exists($routesPath)) {
+				require($routesPath);
+			} else {
+				continue;
+			}
+		}
+	}
+}
