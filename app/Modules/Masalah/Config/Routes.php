@@ -18,5 +18,6 @@ $routes->group('', ['filter' => 'cifilter:auth'], static function ($routes) {
         $routes->get('exportmainmasalah', 'MasalahController::exportMainMasalah', ['as' => 'masalah.exportmainmasalah']);
         $routes->post('multipledeletesub', 'MasalahController::multipleDeleteSub', ['as' => 'masalah.multipledeletesub']);
         $routes->post('multipledeletemain', 'MasalahController::multipleDeleteMain', ['as' => 'masalah.multipledeletemain']);
+        $routes->get('comboboxmainmasalah', 'MasalahController::comboboxMainMasalah', ['as' => 'masalah.comboboxmainmasalah']);
     });
 });

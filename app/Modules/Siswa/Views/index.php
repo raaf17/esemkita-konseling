@@ -31,7 +31,7 @@
                                     <th>Kelas</th>
                                     <th>Tempat Lahir</th>
                                     <th>Tanggal Lahir</th>
-                                    <th>JK</th>
+                                    <th>Jenis Kelamin</th>
                                     <th width="12%">Aksi</th>
                                 </tr>
                             </thead>

@@ -50,10 +50,10 @@ class MasalahController extends BaseController
                 $no++;
                 $row = [];
 
-                $buttonEdit = '<div class="d-flex"><a href="#" class="btn btn-sm btn-light-warning btn-action edit-sub-masalah-btn p-0 p-2 me-2" data-id="' . $list->id . '"><i class="ki-outline ki-notepad-edit fs-4"></i></a>';
-                $buttonDelete = '<a href="#" class="btn btn-sm btn-light-danger delete-sub-masalah-btn p-0 p-2" data-id="' . $list->id . '"><i class="ki-outline ki-basket fs-4"></i></a></div>';
+                $buttonEdit = '<div class="d-flex"><a href="#" class="btn btn-warning mr-1" onclick="onEdit(\'' . $list->id . '\')"><i class="fas fa-pencil-alt"></i></a>';
+                $buttonDelete = '<a href="#" class="btn btn-danger" onclick="onDelete(\'' . $list->id . '\')"><i class="fas fa-trash"></i></a></div>';
 
-                $row[] = '<div class="form-check form-check-sm form-check-custom form-check-solid"><input class="form-check-input" type="checkbox" value="1" /></div>';
+                $row[] = '<div class="custom-checkbox custom-control"><input type="checkbox" class="custom-control-input check" name="id[]" value="' . $list->id . '"><label for="" class="custom-control-label"></label></div>';
                 $row[] = $list->nama_main_masalah;
                 $row[] = $list->nama_sub_masalah;
 
@@ -86,10 +86,10 @@ class MasalahController extends BaseController
                 $no++;
                 $row = [];
 
-                $buttonEdit = '<div class="d-flex"><a href="#" class="btn btn-sm btn-light-warning btn-action edit-main-masalah-btn p-0 p-2 me-2" data-id="' . $list->id . '"><i class="ki-outline ki-notepad-edit fs-4"></i></a>';
-                $buttonDelete = '<a href="#" class="btn btn-sm btn-light-danger delete-main-masalah-btn p-0 p-2" data-id="' . $list->id . '"><i class="ki-outline ki-basket fs-4"></i></a></div>';
+                $buttonEdit = '<div class="d-flex"><a href="#" class="btn btn-warning mr-1" onclick="onEdit(\'' . $list->id . '\')"><i class="fas fa-pencil-alt"></i></a>';
+                $buttonDelete = '<a href="#" class="btn btn-danger" onclick="onDelete(\'' . $list->id . '\')"><i class="fas fa-trash"></i></a></div>';
 
-                $row[] = '<div class="form-check form-check-sm form-check-custom form-check-solid"><input class="form-check-input" type="checkbox" value="1" /></div>';
+                $row[] = '<div class="custom-checkbox custom-control"><input type="checkbox" class="custom-control-input check" name="id[]" value="' . $list->id . '"><label for="" class="custom-control-label"></label></div>';
                 $row[] = $list->nama_main_masalah;
 
                 $row[] = $buttonEdit . $buttonDelete;
@@ -659,5 +659,15 @@ class MasalahController extends BaseController
         header('Cache-Control: max-age=0');
         $writer->save('php://output');
         exit();
+    }
+
+    public function comboboxMainMasalah()
+    {
+        $data = $this->main_masalah
+            ->select(['id', 'nama_main_masalah'])
+            ->orderBy('nama_main_masalah', 'ASC')
+            ->findAll();
+
+        return $this->response->setJSON($data);
     }
 }

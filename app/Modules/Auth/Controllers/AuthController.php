@@ -86,8 +86,12 @@ class AuthController extends BaseController
                 return redirect()->route('login.form')->with('message', 'Password salah')->withInput();
             } else {
                 CIAuth::setCIAuth($userInfo);
-                
-                return redirect()->route('dashboard');
+
+                if (get_user()->role == 'SuperAdmin') {
+                    return redirect()->route('dashboard');
+                } else {
+                    return redirect()->route('home');
+                }
             }
         }
     }

@@ -6,7 +6,7 @@
         <div class="col-lg-4">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h4>Tambah Quesioner</h4>
+                    <h4>Tambah Materi</h4>
                 </div>
                 <div class="card-body">
                     <form action="" method="POST" id="materi_form" autocomplete="off">

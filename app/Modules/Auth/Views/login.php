@@ -30,7 +30,10 @@
                         <form action="<?= route_to('admin.login.handler'); ?>" method="POST">
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input id="email" type="email" class="<?= ($validation->hasError('login_id')) ? 'is-invalid' : '' ?> form-control" name="login_id" id="email" value="<?= set_value('login_id'); ?>" placeholder="Username Or Email">
+                                <input id="email" type="text" class="<?= ($validation->hasError('login_id')) ? 'is-invalid' : '' ?> form-control" name="login_id" id="email" value="<?= set_value('login_id'); ?>" placeholder="Username Or Email">
+                                <?php if ($validation->hasError('login_id')) : ?>
+                                    <small class="text-danger"><?= $validation->getError('login_id'); ?></small>
+                                <?php endif; ?>
                             </div>
 
                             <div class="form-group">
@@ -50,6 +53,9 @@
                                         </button>
                                     </div>
                                 </div>
+                                <?php if ($validation->hasError('password')) : ?>
+                                    <small class="text-danger"><?= $validation->getError('password'); ?></small>
+                                <?php endif; ?>
                             </div>
 
                             <div class="form-group">

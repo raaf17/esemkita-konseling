@@ -43,7 +43,7 @@ class LayananController extends BaseController
                 $row = [];
 
                 $buttonEdit = '<div class="d-flex"><a href="#" class="btn btn-warning mr-1" onclick="onEdit(\'' . $list->id . '\')"><i class="fas fa-pencil-alt"></i></a>';
-                $buttonDelete = '<a href="#" class="btn btn-danger delete-layanan-btn" onclick="onDelete(\'' . $list->id . '\')"><i class="fas fa-trash"></i></a></div>';
+                $buttonDelete = '<a href="#" class="btn btn-danger" onclick="onDelete(\'' . $list->id . '\')"><i class="fas fa-trash"></i></a></div>';
 
                 $row[] = '<div class="custom-checkbox custom-control"><input type="checkbox" class="custom-control-input check" name="id[]" value="' . $list->id . '"><label for="" class="custom-control-label"></label></div>';
                 $row[] = $list->nama_layanan;

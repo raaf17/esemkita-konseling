@@ -26,14 +26,18 @@ class CIFilter implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        if($arguments[0] == 'guest') {
-            if(CIAuth::check()){
-                return redirect()->route('dashboard');
+        if ($arguments[0] == 'guest') {
+            if (CIAuth::check()) {
+                if (get_user()->role == 'SuperAdmin') {
+                    return redirect()->route('dashboard');
+                } else {
+                    return redirect()->route('home');
+                }
             }
         }
 
-        if($arguments[0] == 'auth') {
-            if(!CIAuth::check()){
+        if ($arguments[0] == 'auth') {
+            if (!CIAuth::check()) {
                 return redirect()->route('login.form')->with('message', 'Anda harus login terlebih dahulu');
             }
         }

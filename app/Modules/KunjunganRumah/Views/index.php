@@ -6,7 +6,7 @@
         <div class="col-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h4>Data Laporan</h4>
+                    <h4>Data Kunjungan Rumah</h4>
                     <div class="card-header-action">
                         <a href="#" class="btn btn-success mr-1"><i class="fa fa-file-excel"></i> Export</a>
                         <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus Banyak</button>
