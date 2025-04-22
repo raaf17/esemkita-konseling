@@ -2,7 +2,35 @@
 
 <?= $this->section('content') ?>
 <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-7">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h4>Data Jurusan</h4>
+                <div class="card-header-action">
+                    <button type="button" class="btn btn-primary mr-1" onclick="onImport()"><i class="fas fa-file-import"></i> Import</button>
+                </div>
+            </div>
+            <div class="card-body">
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h4>Data Jurusan</h4>
+                <div class="card-header-action">
+                    <button type="button" class="btn btn-primary mr-1" onclick="onImport()"><i class="fas fa-file-import"></i> Import</button>
+                </div>
+            </div>
+            <div class="card-body">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
@@ -22,16 +50,64 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-4">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Aktifitas Konsultasi</h4>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="doughnutChart" style="height: 300px;"></canvas>
-                    </div>
+</div>
+<div class="row">
+    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+        <div class="card card-statistic-1">
+            <div class="card-icon bg-primary">
+                <i class="far fa-user"></i>
+            </div>
+            <div class="card-wrap">
+                <div class="card-header">
+                    <h4>Total Admin</h4>
+                </div>
+                <div class="card-body">
+                    10
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+        <div class="card card-statistic-1">
+            <div class="card-icon bg-danger">
+                <i class="far fa-newspaper"></i>
+            </div>
+            <div class="card-wrap">
+                <div class="card-header">
+                    <h4>News</h4>
+                </div>
+                <div class="card-body">
+                    42
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+        <div class="card card-statistic-1">
+            <div class="card-icon bg-warning">
+                <i class="far fa-file"></i>
+            </div>
+            <div class="card-wrap">
+                <div class="card-header">
+                    <h4>Reports</h4>
+                </div>
+                <div class="card-body">
+                    1,201
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+        <div class="card card-statistic-1">
+            <div class="card-icon bg-success">
+                <i class="fas fa-circle"></i>
+            </div>
+            <div class="card-wrap">
+                <div class="card-header">
+                    <h4>Online Users</h4>
+                </div>
+                <div class="card-body">
+                    47
                 </div>
             </div>
         </div>
@@ -101,40 +177,6 @@
                             }
                         }
                     });
-
-                    // DOUGHNUT CHART
-                    var ctxDoughnut = document.getElementById("doughnutChart").getContext("2d");
-                    var doughnutChart = new Chart(ctxDoughnut, {
-                        type: 'doughnut',
-                        data: {
-                            labels: nama_layanan,
-                            datasets: [{
-                                data: jumlah,
-                                backgroundColor: generateColors(jumlah.length),
-                                borderColor: '#fff',
-                                borderWidth: 2
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            plugins: {
-                                legend: {
-                                    position: 'bottom'
-                                },
-                                tooltip: {
-                                    callbacks: {
-                                        label: function(tooltipItem) {
-                                            let label = tooltipItem.label || '';
-                                            let value = tooltipItem.raw || 0;
-                                            return `${label}: ${value}`;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    });
-
                 } else {
                     console.error("Data tidak ditemukan");
                 }

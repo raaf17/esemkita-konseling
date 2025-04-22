@@ -1,0 +1,88 @@
+.border-top-yellow {
+	border-right: 1px solid #eee;
+	border-bottom: 1px solid #eee;
+	border-left: 1px solid #eee;
+	border-top: 3px solid #ffc800;
+	border-radius: 5px !important;
+    background-color: #fff;
+}
+
+.border-content {
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 4px!important;
+    box-shadow: 0px 15px 0px -10px #ffc800;
+}
+
+.title-header-yellow {
+    font-weight: 600;
+    padding: 10px!important;
+    font-weight: 600;
+    background-image: radial-gradient(#d4d4d4 20%, transparent 20%), radial-gradient(#fafafa 20%, transparent 20%);
+    background-color: #fff;
+    background-position: 0 0, 50px 50px;
+    background-size: 3px 3px;
+    border-radius: 4px !important;
+    border-left: 3px solid #f2c308;
+}
+
+.title-header-blue {
+    font-weight: 600;
+    padding: 10px!important;
+    font-weight: 600;
+    background-image: radial-gradient(#d4d4d4 20%, transparent 20%), radial-gradient(#fafafa 20%, transparent 20%);
+    background-color: #fff;
+    background-position: 0 0, 50px 50px;
+    background-size: 3px 3px;
+    border-radius: 4px !important;
+    border-left: 3px solid #4c91cd;
+}
+
+.title-header-green {
+    font-weight: 600;
+    padding: 10px!important;
+    font-weight: 600;
+    background-image: radial-gradient(#d4d4d4 20%, transparent 20%), radial-gradient(#fafafa 20%, transparent 20%);
+    background-color: #fff;
+    background-position: 0 0, 50px 50px;
+    background-size: 3px 3px;
+    border-radius: 4px !important;
+    border-left: 3px solid #44b6ae;
+}
+
+.title-header-red {
+    font-weight: 600;
+    padding: 10px!important;
+    font-weight: 600;
+    background-image: radial-gradient(#d4d4d4 20%, transparent 20%), radial-gradient(#fafafa 20%, transparent 20%);
+    background-color: #fff;
+    background-position: 0 0, 50px 50px;
+    background-size: 3px 3px;
+    border-radius: 4px !important;
+    border-left: 3px solid #e35b5a;
+}
+/*.my-containers {
+    position: absolute;
+    overflow: hidden;
+}
+
+.my-containers:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.08;
+    background-image: url('./assets/frontend/layout/img/logos/timah.png');
+    background-repeat: no-repeat;
+    background-position: 10% 0;
+    -ms-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: inherit;
+}*/

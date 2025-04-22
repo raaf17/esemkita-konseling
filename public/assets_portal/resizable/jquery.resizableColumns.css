@@ -1,0 +1,31 @@
+.rc-handle-container {
+  position: relative;
+}
+.rc-handle {
+  position: absolute;
+  width: 7px;
+  cursor: ew-resize;
+  margin-left: -3px;
+  z-index: 2;
+}
+
+.table-resize.rc-table-resizing {
+  cursor: ew-resize;
+}
+.table-resize.rc-table-resizing thead,
+.table-resize.rc-table-resizing thead > th,
+.table-resize.rc-table-resizing thead > th > a {
+  cursor: ew-resize;
+}
+
+.table-resize {
+  table-layout: fixed;
+}
+.table-resize td, .table-resize th {
+  overflow: hidden;
+  white-space: nowrap;
+  -moz-text-overflow: ellipsis;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}

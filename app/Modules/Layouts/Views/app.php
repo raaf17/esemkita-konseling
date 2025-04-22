@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="<?= base_url() ?>/extra-assets/ijaboCropTool/ijaboCropTool.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>/libs/toastr/build/toastr.css">
     <link rel="stylesheet" href="<?= base_url('stisla') ?>/node_modules/select2/dist/css/select2.min.css">
+    <link href="<?php echo base_url(); ?>assets/plugins/custom/datatables/datatables.bundle.css?v=<?php echo rand(); ?>" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://unpkg.com/nprogress@0.2.0/nprogress.css">
     <script src="https://unpkg.com/nprogress@0.2.0/nprogress.js"></script>
@@ -85,6 +86,7 @@
     <script src="<?= base_url() ?>/helpers/helper.js"></script>
     <script src="<?= base_url() ?>/libs/toastr/toastr.js"></script>
     <script src="<?= base_url() ?>/extra-assets/ijaboCropTool/ijaboCropTool.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/plugins/custom/datatables/datatables.bundle.js?v=<?php echo rand(); ?>"></script>
     <!-- <script src="<?= base_url() ?>/apexcharts/dist/apexcharts.js"></script> -->
     <!-- JS -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
