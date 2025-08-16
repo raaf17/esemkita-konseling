@@ -1,68 +1,125 @@
-# CodeIgniter 4 Application Starter
+# 🏫 Bimbingan Konseling Management System
 
-## What is CodeIgniter?
+Proyek ini adalah **aplikasi manajemen bimbingan konseling** berbasis web yang dibangun menggunakan **CodeIgniter 4 (HMVC Structure)**.  
+Aplikasi ini ditujukan untuk membantu sekolah/guru BK dalam mengelola data siswa, layanan konseling, laporan, hingga manajemen akses pengguna.
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+---
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+## ✨ Fitur Utama
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+- 🔐 **Autentikasi & Hak Akses**
+  - Login, lupa password, reset password
+  - Manajemen role & permission berbasis menu/submenu
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+- 👩‍🏫 **Manajemen Data Guru & Siswa**
+  - CRUD Guru, Siswa, Jurusan, Kelas
+  - Mutasi siswa
 
-## Installation & updates
+- 🧑‍🤝‍🧑 **Layanan Konseling**
+  - Konseling individu & kelompok
+  - Kunjungan rumah
+  - Pendataan masalah siswa
+  - Pencatatan layanan & tindak lanjut
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+- 📊 **Laporan & Monitoring**
+  - Laporan kegiatan konseling
+  - Aktivitas login pengguna
+  - Dashboard ringkasan data
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+- ⚙️ **Fitur Pendukung**
+  - Manajemen profil pengguna
+  - Manajemen setting aplikasi
+  - Upload & generate laporan dalam format PDF
+  - Quiz & Materi pembelajaran tambahan
 
-## Setup
+---
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+## 📂 Struktur Proyek
 
-## Important Change with index.php
+Proyek ini menggunakan **modular structure (HMVC)**. Beberapa module utama:
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+```
+app/
+├─ Modules/
+│  ├─ Auth/           → Login, reset password
+│  ├─ Dashboard/      → Dashboard utama
+│  ├─ Guru/           → CRUD Guru
+│  ├─ Siswa/          → CRUD Siswa
+│  ├─ Kelas/          → CRUD Kelas
+│  ├─ Jurusan/        → CRUD Jurusan
+│  ├─ Konseling/      → Manajemen konseling siswa
+│  ├─ KunjunganRumah/ → Data kunjungan rumah siswa
+│  ├─ Masalah/        → Data masalah siswa
+│  ├─ Layanan/        → Jenis layanan konseling
+│  ├─ Laporan/        → Laporan kegiatan
+│  ├─ HakAkses/       → Role & Permission
+│  ├─ Profile/        → Profil pengguna
+│  ├─ Users/          → Manajemen user
+│  └─ Settings/       → Pengaturan sistem
+```
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+Selain itu tersedia:
+- `app/Helpers` → helper custom (`CIFunctions`, `CIMail`, `CIPdf`)  
+- `app/Libraries` → library custom (`CIAuth`, `GenerateUuid`, `Hash`)  
+- `public/assets` → static files (CSS, JS, images)  
 
-**Please** read the user guide for a better explanation of how CI4 works!
+---
 
-## Repository Management
+## 🛠️ Teknologi
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+- **Framework**: [CodeIgniter 4](https://codeigniter.com/)  
+- **Database**: MySQL/MariaDB  
+- **Frontend Assets**: Bootstrap, jQuery, DataTables, dll.  
+- **Library Tambahan**: PhpSpreadsheet, dompdf, ramsey/uuid  
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+---
 
-## Server Requirements
+## 🚀 Instalasi
 
-PHP version 8.1 or higher is required, with the following extensions installed:
+1. **Clone repository**
+   ```bash
+   git clone https://github.com/username/project-bk.git
+   cd project-bk
+   ```
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+2. **Install dependencies dengan Composer**
+   ```bash
+   composer install
+   ```
 
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - If you are still using PHP 7.4 or 8.0, you should upgrade immediately.
-> - The end of life date for PHP 8.1 will be December 31, 2025.
+3. **Salin file env**
+   ```bash
+   cp env .env
+   ```
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+4. **Konfigurasi environment (.env)**
+   ```env
+   app.baseURL = 'http://localhost:8080'
+   database.default.hostname = localhost
+   database.default.database = nama_database
+   database.default.username = root
+   database.default.password =
+   database.default.DBDriver = MySQLi
+   ```
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+5. **Jalankan server**
+   ```bash
+   php spark serve
+   ```
+
+6. Akses di browser:  
+   👉 `http://localhost:8080`
+
+---
+
+## 👨‍💻 Developer Notes
+
+- Struktur menggunakan **HMVC** agar modular & scalable
+- Gunakan `php spark migrate` untuk menjalankan migrasi database
+- Hak akses berbasis **role & url** yang diatur melalui modul **HakAkses**
+
+---
+
+## 📜 License
+
+[MIT License](LICENSE)
